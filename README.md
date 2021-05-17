@@ -3,4 +3,4 @@ Python based web app for coffee tasting with taste profile visualization and com
 
 ## App Layout
 
-![layout](pycoffee-layout-01.png)
+![layout](pycoffee-draft-v01.png)
