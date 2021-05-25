@@ -19,8 +19,8 @@ def input_tasting():
     for col in cols:
         if col=="Datum":
            row_dict[col] = date.today() # Autofill date
-        #elif col=="Uživatel":
-        #    row_dict[col] = username() # Autofill username
+        elif col=="Uživatel":
+            row_dict[col] = username # Autofill username
         else:
             row_dict[col] = input(col+": ").title() # Make all inputs start with uppercase
     return row_dict
