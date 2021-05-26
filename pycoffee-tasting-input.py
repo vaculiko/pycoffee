@@ -10,7 +10,7 @@ from pathlib import Path
 cols = ["Date", "User", "CountryOrigin", "EstateOrigin", "Processing", "RoastLevel", "Variety", "Roaster", "Preparation", "Recipe"]
 #, "Známka", "Acidita", "Zemitost", "Intenzita", "Sladkost", "Poznámka"
 
-username = 'TestGUI'
+username = 'TestGUI_2'
 
 # Initialize dataframe 
 df = pd.DataFrame(columns=cols)
@@ -23,23 +23,24 @@ menu_def = [['&File', ['&Open', '&Save', 'E&xit', 'Properties']],
 
 # ------ Input Definition ------ #
 # Aliases for easy resizing
-textinput_size = 20,5
-sliderinput_size = 10,20
+textinput_size = 20,5   # First number is width, second number is high
+sliderinput_size = 10,20   # First number is high, second number is width
 
-# Text inputs
+# Text & spin inputs, separated from sliders for easier column separation in the layout
 textinput = [[sg.Input(default_text = "Země", key='CountryOrigin', size=(textinput_size))],
             [sg.Input(default_text = "Region", key='EstateOrigin', size=(textinput_size))],
-            [sg.Input(default_text = "Zpracování", key='ProcessingRoastLevel', size=(textinput_size))],
+            [sg.Input(default_text = "Zpracování", key='Processing', size=(textinput_size))],
             [sg.Input(default_text = "Pražírna", key='Roaster', size=(textinput_size))],
             [sg.Input(default_text = "Příprava", key='Preparation', size=(textinput_size))],
-            [sg.Input(default_text = "Recept", key='Recipe', size=(textinput_size))]]
+            [sg.Input(default_text = "Recept", key='Recipe', size=(textinput_size))],
+            [sg.Text('Pražení'), # Spin box, selection of values is pre-given by app
+            sg.Spin(values=('1 Světlé', '2', '3 Střední', '4', '5 Tmavé'), key='RoastLevel', initial_value='Střední', size=(10,5))]]
 
-# Slider inputs
-sliderinput = [[sg.Text('Pražení'), sg.Text('Složení')],
-          [sg.Text('Tmavé'), sg.Text('Arabica')],
-          [sg.Slider(key='RoastLevel', range=(1, 100), orientation='v', size=(sliderinput_size), default_value=50),
-          sg.Slider(key='Variant', range=(1, 100), orientation='v', size=(sliderinput_size), default_value=100)],
-          [sg.Text('Světlé'), sg.Text('Robusta')]]
+# Slider inputs, separated from text & spin for easier column separation in the layout
+sliderinput = [[sg.Text('Složení')],
+          [sg.Text('100% Arabica')],
+          [sg.Slider(key='Variety', range=(1, 100), orientation='v', size=(sliderinput_size), default_value=100, disable_number_display=True)],
+          [sg.Text('100% Robusta')]]
 
 # Buttons
 buttons = [sg.Button(button_text='Jde se ochutnávat!', tooltip='Kliknutím přejdeš na známkování chuti')]
@@ -61,7 +62,7 @@ while True:
     event, values = window.read()
     # End program if user closes window or
     # presses the "Jde se ochutnávat!" button
-    if event == "Jde se ochutnávat!" or event == sg.WIN_CLOSED:
+    if event in ("Jde se ochutnávat!", sg.WIN_CLOSED, 'Exit'):
         break
 
 window.close()
@@ -75,6 +76,8 @@ def input_tasting():
            row_dict[col] = date.today() # Autofill date
         elif col=="User":
             row_dict[col] = username # Autofill username
+        elif col=="Variety":
+            row_dict[col] = values[col] # Variety has numeric value, it's a float object and cannot be uppercased
         else:
             row_dict[col] = values[col].title() # Make all inputs start with uppercase
     return row_dict
