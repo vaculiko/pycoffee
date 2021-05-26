@@ -9,6 +9,7 @@ from pathlib import Path
 # Define database columns
 cols = ["Date", "User", "CountryOrigin", "EstateOrigin", "Processing", "RoastLevel", "Variety", "Roaster", "Preparation", "Recipe"]
 #, "Známka", "Acidita", "Zemitost", "Intenzita", "Sladkost", "Poznámka"
+
 username = 'TestGUI'
 
 # Initialize dataframe 
@@ -42,13 +43,15 @@ sliderinput = [[sg.Text('Pražení'), sg.Text('Složení')],
 
 # Buttons
 buttons = [sg.Button(button_text='Jde se ochutnávat!', tooltip='Kliknutím přejdeš na známkování chuti')]
-layout = [[sg.Frame('',[[
+
+# ------ Layout Definition ------ #
+layout = [[sg.Menu(menu_def, tearoff=True)],
+          [sg.Frame('',[[
           sg.Text('Z čeho a jak vaříme?')],
           [sg.Column(textinput),
           sg.Column(sliderinput)
           ]], element_justification='center')],
         [sg.Column([buttons], justification='center')]]
-# Add two potenctiometers/posuvníky for Roast level and for Variant = 100%Arabica-100%Robusta
 
 # Create the window
 window = sg.Window("PyCoffee", layout, margins=(60,20))
@@ -57,14 +60,12 @@ window = sg.Window("PyCoffee", layout, margins=(60,20))
 while True:
     event, values = window.read()
     # End program if user closes window or
-    # presses the OK button
+    # presses the "Jde se ochutnávat!" button
     if event == "Jde se ochutnávat!" or event == sg.WIN_CLOSED:
         break
 
 window.close()
 print(values)
-
-# "Známka", "Acidita", "Zemitost", "Intenzita", "Sladkost", "Poznámka"
 
 # Console input for tasting info
 def input_tasting():
@@ -75,7 +76,6 @@ def input_tasting():
         elif col=="User":
             row_dict[col] = username # Autofill username
         else:
-            # row_dict[col] = input(col+": ").title() # Make all inputs start with uppercase
             row_dict[col] = values[col].title() # Make all inputs start with uppercase
     return row_dict
 
@@ -93,10 +93,3 @@ df.to_csv(file, mode='a', index=False, header=hdr)
 
 
 print(df)
-
-# Talon tips
-# V GUI se výstup z okna ukládá přímo do dictionary, takže když si dobře pojmenuješ jednotlivé vstupy, 
-# tak to pak jen příkazem dd.append přidáš do databáze
-# Pro input pole v GUI definuješ hodnotu key, která je přímo navázána na dictionary
-# Ten je v proměnné 'values' z výstupu funkce window.read()
-# Udělej si print(values) a uvidíš 🙂
