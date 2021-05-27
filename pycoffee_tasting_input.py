@@ -42,8 +42,12 @@ Slider is used for measuring ration between Arabica and Robusta component in use
 Buttons are specified for either submiting of inputs & continuation to the next page, or returning to previous page.
 --------------------------
 ToDo:
+# List comprehension na if loop mazání default textu
 # Přidat pamatování si předchozích textových inputů, když uživatel rozklikne, nabídne se mu, co psal dříve. Třeba 5 nejčastějších.
 # Vyrobit akci na tlačítku Zpět :D
+# Do okna s Recepty vložit "BrewingMethod", "BrewingRecipe", nebo vymyslet, kam to dát
+# Login okno (Talon už na tom dělá)
+# Tasting okno má prozatím obsahovat "Známka", "Acidita", "Zemitost", "Intenzita", "Sladkost", "Poznámka"
 """
 
 # ------ Database Definition ------ #
@@ -51,8 +55,6 @@ ToDo:
 # Bean info: Country, Name, Roaster, Processing, Roast Level, Type, Variety, Brewing Method, Brewing Recipe
 cols = ["Date", "User", "Country", "Name", "Roaster",
         "Processing", "RoastLevel", "Type", "Variety"]
-# , "BrewingMethod", "BrewingRecipe"
-# , "Známka", "Acidita", "Zemitost", "Intenzita", "Sladkost", "Poznámka"
 df = pd.DataFrame(columns=cols)  # Initialize dataframe
 
 username = 'TestGUI_2.8'
@@ -65,7 +67,7 @@ menu_def = [['&Account', ['&Open', '&Save', 'E&xit', 'Properties']],
 # ------ Global definitions ------ #
 sg.theme('DarkAmber')
 base_font = ('Any 15')
-base_align = 'center'   # For justification parameter
+base_align = 'center'   # For justification parameter governing horizontal alignment of elements
 
 # ---- Function for generating text inputs & enabling of easy formatting for Beans Origin section ---- #
 def BeansOrigin(key_sp, def_text):
@@ -111,7 +113,7 @@ layoutBeans = [
      [sg.Column(layout=[BeansOrigin(key_sp,def_text) for key_sp,def_text in [(keys[i],def_txs[i]) for i in range(len(keys))]])],
                       
      # ---- Beans processing details ---- #
-     # -- Spin selection box with roasting levels -- *
+     # -- Spin selection box for Roasting Levels -- *
      [sg.Spin(
          key='RoastLevel',
          values=[
@@ -136,12 +138,13 @@ layoutBeans = [
      # ---- Fancy frame ends here ---- #
      ], element_justification='center')],
     
-    # ---- Button to submit and go for the next page ---- #
+    # ---- Buttons to submit and go for the next page OR return back---- #
     [sg.Column([buttons], justification=base_align)]]
 
 
 
 # ------ "Recepty" Layout Definition ------ #
+# Currently unused, will be transfered to another file
 layoutRecepy = [
     [sg.Input(default_text="Způsob přípravy - espresso, V60...",
               key='BrewingMethod', size=(30, 20))],
@@ -154,10 +157,10 @@ layoutRecepy = [
 windowBeans = sg.Window("PyCoffee", layoutBeans, margins=(
     5, 5), no_titlebar=False, finalize=True)
 
-# ------ Binding <focus> events from thinker on our PySimpleGUI "Beans Origins" text inputs ------ #
-# This will block any Focus on the window opening; so the first click also clears default text
+# ------ Binding <focus> events from thinker on PySimpleGUI "Beans Origins" text inputs ------ #
+# Blocks any Focus on the window opening, so the first click also clears default text
 windowBeans['Country'].block_focus(block=True)
-# List comprehension for space reduction
+# Binds generation of Focus events on text inputs field generated from list <keys>
 [windowBeans[key].bind('<FocusIn>', '+FOCUS IN+') for key in keys]
 
 
