@@ -88,6 +88,14 @@ layoutRecepy = [
 # Create the window
 windowBeans = sg.Window("PyCoffee", layoutBeans, margins=(5,5), finalize=True)
 
+# Clearance od default texts in text input fields in Beans windows
+windowBeans['Country'].bind('<FocusIn>', '+FOCUS IN+')
+windowBeans['Country'].block_focus(block = True)
+windowBeans['Name'].bind('<FocusIn>', '+FOCUS IN+')
+windowBeans['Roaster'].bind('<FocusIn>', '+FOCUS IN+')
+windowBeans['Processing'].bind('<FocusIn>', '+FOCUS IN+')
+windowBeans['Variety'].bind('<FocusIn>', '+FOCUS IN+')
+
 # Create an event loop
 while True:
     event, values = windowBeans.read()
@@ -96,6 +104,17 @@ while True:
     if event in ('Type'):
          windowBeans.Element('_LEFT_').Update(100-values['Type'])
          windowBeans.Element('_RIGHT_').Update(values['Type'])
+    # Clear default text if the text input field is focused
+    if event == 'Country+FOCUS IN+' and values['Country'] == "Země - Kenya, Brazil...":
+        windowBeans['Country'].update('')
+    if event == 'Name+FOCUS IN+' and values['Name'] == "Jméno - Kiwami, Diamond...":
+        windowBeans['Name'].update('')
+    if event == 'Roaster+FOCUS IN+' and values['Roaster'] == "Pražírna - Motmot, Father's...":
+        windowBeans['Roaster'].update('')
+    if event == 'Processing+FOCUS IN+' and values['Processing'] == "Zpracování - natural, washed...":
+        windowBeans['Processing'].update('')
+    if event == 'Variety+FOCUS IN+' and values['Variety'] == "Odrůda - Heirloom, Tabi...":
+        windowBeans['Variety'].update('')    
     # End program if user closes window or presses the "Jde se ochutnávat!" button
     if event in ("Jde se ochutnávat!", sg.WIN_CLOSED, 'Exit'):
         break
