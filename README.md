@@ -1,4 +1,5 @@
 # pycoffee
+
 Python based web app for coffee tasting with taste profile visualization and comparison.
 
 ## App Layout
@@ -7,7 +8,7 @@ Python based web app for coffee tasting with taste profile visualization and com
 
 ## TODO
 
-- [ ] GUI login - Aestas  
+- [ ] GUI - Aestas  
 - [ ] Pandas database - Talon  
 - [ ] Taste wheel - Zorin
 - [ ] Discord user autenthication
@@ -32,7 +33,7 @@ Python based web app for coffee tasting with taste profile visualization and com
   - **Acidity** - low to high (1-10)
   - _Zemitost_
   - _Intenzita_
-  - **Sweetnes**
+  - **Sweetness**
   - ...
   - **Note** - optional text input
 
