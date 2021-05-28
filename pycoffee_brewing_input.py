@@ -81,7 +81,7 @@ layoutBeans = [
     
     # ---- Fancy frame and title ---- #
     [sg.Frame('', layout=[
-     [sg.Text('Zrno', font=base_font)],
+     [sg.Text('Příprava', font=base_font)],
      
      # ---- Generated "Beans Origin" text input fields: ---- #
      [sg.Column(layout=[BeansOrigin(key_sp,def_text) for key_sp,def_text in [(keys[i],def_txs[i]) for i in range(len(keys))]])],
@@ -149,7 +149,7 @@ def input_tasting():
     return row_dict
 
 
-# ------ Manual inpu ------ #
+# ------ Manual input ------ #
 # -- Generate dictionary and add it as new line to database-- #
 new_row = input_tasting()
 df = df.append(new_row, ignore_index=True)
