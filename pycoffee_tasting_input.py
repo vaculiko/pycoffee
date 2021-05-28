@@ -34,20 +34,27 @@ Selection box for Roasting Level indication uses Spin element.
                Visible default value is just plain text, can be anything, while real starting value is remains 1.
 
 Slider is used for measuring ration between Arabica and Robusta component in used coffee beans.
-# Numerical counters are configured to start at 0 on Robusta side and 100 on Arabica side. Default avlue for slider
-  is 100 and graphically matches Arabica side. Slider can be moved in range 0-100 by steps of 5.
-  Counters are modified by events in slider changes. With every step of slider the value of counter is increased 
-  or decreased. On Robusta side the value is '100-SliderValue', on Arabica side value is simply equal to SliderValue.
+# Numerical counters are configured to start at 0 on Robusta side and 100 on Arabica side.
+# Default value for slider is 100 and graphically matches Arabica side.
+# Slider can be moved in range 0-100 by steps of 5.
+# Counters are modified by events from slider changes. With every step of slider-movement, the value of counter is
+  increased or decreased. On Robusta the value is '100-SliderValue', on Arabica value is simply equal to SliderValue.
   
-Buttons are specified for either submiting of inputs & continuation to the next page, or returning to previous page.
+There are currently two buttons:
+# Button to submit inputs & continue to the next page.
+# Button to returning to the previous page.
 --------------------------
 ToDo:
-# List comprehension na if loop mazání default textu
 # Přidat pamatování si předchozích textových inputů, když uživatel rozklikne, nabídne se mu, co psal dříve. Třeba 5 nejčastějších.
 # Vyrobit akci na tlačítku Zpět :D
-# Do okna s Recepty vložit "BrewingMethod", "BrewingRecipe", nebo vymyslet, kam to dát
-# Login okno (Talon už na tom dělá)
 # Tasting okno má prozatím obsahovat "Známka", "Acidita", "Zemitost", "Intenzita", "Sladkost", "Poznámka"
+# Do okna s Recepty vložit "BrewingMethod", "BrewingRecipe", nebo vymyslet, kam to dát
+### layoutRecepy = [
+###     [sg.Input(default_text="Způsob přípravy - espresso, V60...",
+###               key='BrewingMethod', size=(30, 20))],
+###     [sg.Input(default_text="Recept příprav - inverted aeropress, ristretto...",
+###               key='BrewingRecipe', size=(30, 20))],
+### ]
 """
 
 # ------ Database Definition ------ #
@@ -57,7 +64,7 @@ cols = ["Date", "User", "Country", "Name", "Roaster",
         "Processing", "RoastLevel", "Type", "Variety"]
 df = pd.DataFrame(columns=cols)  # Initialize dataframe
 
-username = 'TestGUI_2.8'
+username = 'TestGUI_3.2'
 
 # ------ Menu Definition ------ #
 menu_def = [['&Account', ['&Open', '&Save', 'E&xit', 'Properties']],
@@ -75,7 +82,9 @@ def BeansOrigin(key_sp, def_text):
                      default_text=def_text,
                      size=(30, 1),              # Size of the text input field
                      font=('Any 15'),
-                     justification='center')]   # Alignment of text in the input field
+                     justification='center',     # Alignment of text in the input field
+                     pad=((0,0),(10,10)),
+                     border_width=10)]
 
 # -- Lists of keys and defaults text for text input fields for Beans Origin section -- #
 keys=['Country','Name','Roaster','Processing','Variety']
@@ -96,9 +105,11 @@ slidercount_size = (4, 1)     # Size of counters of current value on slider
 
 # Buttons
 buttons = [sg.Button(button_text='Jde se ochutnávat!',
-                     tooltip='Kliknutím přejdeš na známkování chuti', font=base_font),
+                     tooltip='Kliknutím přejdeš na známkování chuti', font=base_font,
+                     mouseover_colors=('sienna1','OrangeRed4') ),
            sg.Button(button_text='Zpět',
-                     tooltip='Kliknutím se vrátíš na login', font=base_font)]
+                     tooltip='Kliknutím se vrátíš na login', font=base_font,
+                     mouseover_colors=('sienna1','OrangeRed4'))]
 
 # ------ "Beans" Layout Definition ------ #
 layoutBeans = [
@@ -117,14 +128,15 @@ layoutBeans = [
      [sg.Spin(
          key='RoastLevel',
          values=[
-             '      1 Světlé pražení',
-             '      2 Světlejší pražení',
-             '      3 Střední pražení',
-             '      4 Tmavší pražení',
-             '      5 Tmavé pražení'],
-         initial_value='      3 Střední pražení',
+             '               Světlé pražení',
+             '               Polosvětlé pražení',
+             '               Střední pražení',
+             '               Polotmavé pražení',
+             '               Tmavé pražení'],
+         initial_value='               Střední pražení',
          size=spininput_size,
-         font=base_font)],
+         font=base_font,
+         pad=((0,0),(10,10)))],
      # -- Slider with Arabica/Robusta ratio -- *
      [sg.Text('0', key='_LEFT_', size=slidercount_size, font=base_font),                     # Robusta counter
       sg.Text('Robusta', size=slidertext_size, font=base_font,                               # Robusta name
@@ -133,7 +145,11 @@ layoutBeans = [
               justification=base_align),
       sg.Text('100', key='_RIGHT_', size=slidercount_size, font=base_font)],                 # Arabica counter
      [sg.Slider(key='Type', range=(0, 100), resolution=5, orientation='h',
-                disable_number_display=True, default_value=100, font=base_font, enable_events=True)],
+                disable_number_display=True, default_value=100, font=base_font, enable_events=True,
+                border_width=2,
+                relief='ridge',
+                background_color='OrangeRed4',
+                trough_color='sienna1')],
      
      # ---- Fancy frame ends here ---- #
      ], element_justification='center')],
@@ -142,51 +158,52 @@ layoutBeans = [
     [sg.Column([buttons], justification=base_align)]]
 
 
-
-# ------ "Recepty" Layout Definition ------ #
-# Currently unused, will be transfered to another file
-layoutRecepy = [
-    [sg.Input(default_text="Způsob přípravy - espresso, V60...",
-              key='BrewingMethod', size=(30, 20))],
-    [sg.Input(default_text="Recept příprav - inverted aeropress, ristretto...",
-              key='BrewingRecipe', size=(30, 20))],
-]
-
-
 # ------ Create the window ------ #
 windowBeans = sg.Window("PyCoffee", layoutBeans, margins=(
     5, 5), no_titlebar=False, finalize=True)
 
-# ------ Binding <focus> events from thinker on PySimpleGUI "Beans Origins" text inputs ------ #
+# ------ Focus Event Binding from thinker on PySimpleGUI "Beans Origins" text inputs ------ #
 # Blocks any Focus on the window opening, so the first click also clears default text
 windowBeans['Country'].block_focus(block=True)
-# Binds generation of Focus events on text inputs field generated from list <keys>
+# Binds generating of Focus Events on text input fields created from list <keys>
 [windowBeans[key].bind('<FocusIn>', '+FOCUS IN+') for key in keys]
 
 
 # ------ Create an event loop ------ #
+'''
+'Clear' For Loop Explanation
+-----------------
+<For loop> is used to check if any text input field was focused (selected by user).
+For every text input field there is a <key> matching entry from the list <keys>.
+For every text input field there is also <default text> in the text input field 
+(returned as <value> by window.read function) and it matches entry from the list
+<def_txs> on the same position as <key> of the same text input field in <keys>.
+    # E.g. on the first position of <keys> there is 'Country', on first pozition of 
+    <def_txs> there is "Země - Kenya, Brazil...". So the text input field with 
+    <key> 'Country' contains <default text> "Země - Kenya, Brazil...".
+
+<For loop> checks if for any <key> from <keys> the Focus Event was created (syntax is 
+<key+'+FOCUS IN+'> and it is generated by Focus Event Binding code above).
+    # If such Focus event was created (user klicked on text input field) and <value> of the 
+      <key> (the text of the input field) matches entry from <def_txs> on the same position
+      (matches default text given by code), that value (default text) will be cleared.
+-----------------
+'''
 while True:
     event, values = windowBeans.read()
-   # If Arabica/Robusta slider is used, modify values of Arabica/Robusta counters, respectively
+    # -- Clear default text if the text input field on Focus -- #
+    for key in keys:      
+        if event == (key+'+FOCUS IN+') and values[key] == def_txs[keys.index(key)]:       
+            windowBeans[key].update('')       
+   # -- If Arabica/Robusta slider is used, modify values of Arabica/Robusta counters -- #
     if event == 'Type':
         windowBeans.Element('_LEFT_').Update(100-int(values['Type']))
         windowBeans.Element('_RIGHT_').Update(int(values['Type']))
-    # Clear default text if the text input field is focused
-    if event == 'Country+FOCUS IN+' and values['Country'] == "Země - Kenya, Brazil...":
-        windowBeans['Country'].update('')
-    if event == 'Name+FOCUS IN+' and values['Name'] == "Jméno - Kiwami, Diamond...":
-        windowBeans['Name'].update('')
-    if event == 'Roaster+FOCUS IN+' and values['Roaster'] == "Pražírna - Motmot, Father's...":
-        windowBeans['Roaster'].update('')
-    if event == 'Processing+FOCUS IN+' and values['Processing'] == "Zpracování - natural, washed...":
-        windowBeans['Processing'].update('')
-    if event == 'Variety+FOCUS IN+' and values['Variety'] == "Odrůda - Heirloom, Tabi...":
-        windowBeans['Variety'].update('')
-    # If User presses the "Jde se ochutnávat!" button, open next Windows
+    # -- If User presses the "Jde se ochutnávat!" button, open next Windows -- #
     if event in ("Jde se ochutnávat!", sg.WIN_CLOSED, 'Exit'):
         print(values)
         break
-    # End program if User closes window
+    # -- End program if User closes window -- #
     if event in (sg.WIN_CLOSED, 'Exit'):
         break
 
@@ -208,14 +225,14 @@ def input_tasting():
     return row_dict
 
 
-# Manual input
-new_row = input_tasting()  # Generate dictionary
-# Add dictionary as new line to database
+# ------ Manual inpu ------ #
+# -- Generate dictionary and add it as new line to database-- #
+new_row = input_tasting()
 df = df.append(new_row, ignore_index=True)
-
-# Create data directory
+# -- Create data directory -- #
 Path('data').mkdir(parents=True, exist_ok=True)
-# Creates file with headers, if it does not exist; if it exists, it appends new data without headers
+# -- Create database file with headers -- #
+# -- If database file already exists, append new data without headers #
 file = 'data/pycoffee-' + username + '.csv'
 hdr = False if os.path.isfile(file) else True
 df.to_csv(file, mode='a', index=False, header=hdr)
