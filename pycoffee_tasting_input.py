@@ -64,7 +64,7 @@ cols = ["Date", "User", "Country", "Name", "Roaster",
         "Processing", "RoastLevel", "Type", "Variety"]
 df = pd.DataFrame(columns=cols)  # Initialize dataframe
 
-username = 'TestGUI_3.3'
+username = 'TestGUI_3.4'
 
 # ------ Menu Definition ------ #
 menu_def = [['&Account', ['&Open', '&Save', 'E&xit', 'Properties']],
@@ -74,12 +74,13 @@ menu_def = [['&Account', ['&Open', '&Save', 'E&xit', 'Properties']],
 # ------ Global definitions ------ #
 sg.theme('DarkAmber')
 base_font = ('Any 15')
-base_align = 'center'   # For justification parameter governing horizontal alignment of elements
+base_align = 'center'   # For justification parameter = horizontal alignment of elements
 
 # ---- Function for generating text inputs & enabling of easy formatting for Beans Origin section ---- #
 def BeansOrigin(key_sp, def_text):
     return [sg.Input(key=key_sp,
                      default_text=def_text,
+                     tooltip=def_text[:def_text.index(' ')],
                      size=(30, 1),              # Size of the text input field
                      font=('Any 15'),
                      justification='center',     # Alignment of text in the input field
@@ -200,11 +201,11 @@ while True:
         windowBeans.Element('_LEFT_').Update(100-int(values['Type']))
         windowBeans.Element('_RIGHT_').Update(int(values['Type']))
     # -- If User presses the "Jde se ochutnávat!" button, open next Windows -- #
-    if event in ("Jde se ochutnávat!", sg.WIN_CLOSED, 'Exit'):
+    if event in ("Jde se ochutnávat!"):
         print(values)
         break
     # -- End program if User closes window -- #
-    if event in (sg.WIN_CLOSED, 'Exit'):
+    if event in (sg.WIN_CLOSED, 'Exit', 'Zpět'):
         break
 
 windowBeans.close()
