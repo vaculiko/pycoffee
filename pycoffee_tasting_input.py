@@ -12,7 +12,7 @@ from pathlib import Path
 Windows Layout Explanation
 --------------------------
 Layout consists of graphic elements, input elements and buttons.
-Graphic elements are frames and text headers. They look nice, but have zero effect on generated database
+Graphic elements are frames and text headers. They look nice, but have zero effect on generated database.
 
 Input elements are separated into 3 categories:
 - text inputs
@@ -48,20 +48,13 @@ ToDo:
 # Přidat pamatování si předchozích textových inputů, když uživatel rozklikne, nabídne se mu, co psal dříve. Třeba 5 nejčastějších.
 # Vyrobit akci na tlačítku Zpět :D
 # Tasting okno má prozatím obsahovat "Známka", "Acidita", "Zemitost", "Intenzita", "Sladkost", "Poznámka"
-# Do okna s Recepty vložit "BrewingMethod", "BrewingRecipe", nebo vymyslet, kam to dát
-### layoutRecepy = [
-###     [sg.Input(default_text="Způsob přípravy - espresso, V60...",
-###               key='BrewingMethod', size=(30, 20))],
-###     [sg.Input(default_text="Recept příprav - inverted aeropress, ristretto...",
-###               key='BrewingRecipe', size=(30, 20))],
-### ]
 """
 
 # ------ Database Definition ------ #
 # Entry info: date, user
 # Bean info: Country, Name, Roaster, Processing, Roast Level, Type, Variety, Brewing Method, Brewing Recipe
 cols = ["Date", "User", "Country", "Name", "Roaster",
-        "Processing", "RoastLevel", "Type", "Variety"]
+        "Processing", "Variety", "RoastLevel", "Type"]
 df = pd.DataFrame(columns=cols)  # Initialize dataframe
 
 username = 'TestGUI_3.4'
@@ -165,7 +158,7 @@ windowBeans = sg.Window("PyCoffee", layoutBeans, margins=(
 
 # ------ Focus Event Binding from Thinker on PySimpleGUI "Beans Origins" text inputs ------ #
 # Blocks any Focus on the window opening, so the first click also clears default text
-windowBeans['Country'].block_focus(block=True)
+windowBeans[keys[0]].block_focus(block=True)
 # Binds generating of Focus Events on text input fields created from list <keys>
 [windowBeans[key].bind('<FocusIn>', '+FOCUS IN+') for key in keys]
 
