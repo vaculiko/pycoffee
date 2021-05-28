@@ -39,7 +39,10 @@ Python based web app for coffee tasting with taste profile visualization and com
 
 ## Resources
 
-- [PySimpleGUI Demos](https://github.com/PySimpleGUI/PySimpleGUI/tree/master/DemoPrograms)
-- [PySimpleGUI Playlist](https://youtube.com/playlist?list=PLl8dD0doyrvF1nLakJJ7sl8OX2YSHclqn)
+- GUI
+  - [PySimpleGUI Demos](https://github.com/PySimpleGUI/PySimpleGUI/tree/master/DemoPrograms)
+  - [PySimpleGUI Playlist](https://youtube.com/playlist?list=PLl8dD0doyrvF1nLakJJ7sl8OX2YSHclqn)
+  - [Colors](https://www.wikipython.com/tkinter-ttk-tix/summary-information/colors/)
+  - [Themes](https://media.geeksforgeeks.org/wp-content/uploads/20200511200254/f19.jpg)
 - [Pandas Basics Video](https://youtu.be/vmEHCJofslg)
 - [Matplotlib Basics Video](https://www.youtube.com/watch?v=DAQNHzOcO5A)
