@@ -4,6 +4,7 @@ import hashlib
 
 # GUI Settings
 sg.theme('DarkAmber')
+base_font = ('Any 15')
 size = (20, 1)
 button_size = (17, 1)
 # Account username and password hashes are stored in csv file
@@ -26,12 +27,13 @@ def PasswordMatches(password, a_hash):
 
 
 layout = [[sg.Column(layout=[
-    [sg.Text('User', size=size)],
-    [sg.Input(key='-user-', size=size)],
-    [sg.Text('Password', size=size)],
-    [sg.Input(key='-password-', size=size, password_char='\u2022')],
-    [sg.Text('', key='-status-', size=size)],
-    [sg.Button('Login', size=button_size)]],
+    [sg.Text('User', size=size, font=base_font)],
+    [sg.Input(key='-user-', size=size, font=base_font)],
+    [sg.Text('Password', size=size, font=base_font)],
+    [sg.Input(key='-password-', size=size,
+              font=base_font, password_char='\u2022')],
+    [sg.Text('', key='-status-', size=size, font=base_font)],
+    [sg.Button('Login', size=button_size, font=base_font)]],
     element_justification='center')
 ]]
 
@@ -43,7 +45,8 @@ while True:
     event, values = window.read()
 
     if event == sg.WIN_CLOSED:
-        break
+        window.close()
+        exit()
 
     # Evaluate only after 'Login' button press
     if event == 'Login':
@@ -54,8 +57,9 @@ while True:
         if user in accounts.keys():
             # if password hashes match
             if password and PasswordMatches(password, accounts[user]):
-                window.Element('-status-').Update('Login SUCCESSFUL')
+                print('Login SUCCESSFUL!')
                 window.close()
+                break
             # if password hashes do not match
             else:
                 window.Element('-status-').Update('Wrong password.')
@@ -73,5 +77,4 @@ while True:
             window.Element('-status-').Update(visible=False)
             window.Element('Login').Update(visible=False)
             window.close()
-
-window.close()
+            exit()
