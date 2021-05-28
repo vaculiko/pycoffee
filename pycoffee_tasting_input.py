@@ -191,7 +191,7 @@ For every text input field there is also <default text> in the text input field
 '''
 while True:
     event, values = windowBeans.read()
-    # -- Clear default text if the text input field on Focus -- #
+    # -- Clear default text of the text input field on Focus -- #
     for key in keys:      
         if event == (key+'+FOCUS IN+') and values[key] == def_txs[keys.index(key)]:       
             windowBeans[key].update('')       
