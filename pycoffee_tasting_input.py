@@ -112,7 +112,7 @@ def main(username='TestGUI_3.4', screen_size=(300, 600)):
 
         # ---- Fancy frame and title ---- #
         [sg.Frame('', layout=[
-            [sg.Text('Zrno', font=base_font)],
+            [sg.Text('Zrno', font=base_font)], 
 
             # ---- Generated "Beans Origin" text input fields: ---- #
             [sg.Column(layout=[BeansOrigin(key_sp, def_text) for key_sp, def_text in [

@@ -34,7 +34,7 @@ ToDo:
 # Hezká grafika
 """
 
-cols = ["BrewingMethod", "BrewingRecipe"]
+cols = ["BrewingMethod", "BrewingRecipe"] 
 df = pd.DataFrame(columns=cols)  # Initialize dataframe
 
 username = 'TestGUI_3.4'
