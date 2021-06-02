@@ -51,7 +51,7 @@ ToDo:
 """
 
 
-def main(username='TestGUI_3.4'):
+def main(username='TestGUI_3.4', screen_size=(300, 600)):
     # ------ Database Definition ------ #
     # Entry info: date, user
     # Bean info: Country, Name, Roaster, Processing, Roast Level, Type, Variety, Brewing Method, Brewing Recipe
@@ -154,7 +154,7 @@ def main(username='TestGUI_3.4'):
 
     # ------ Create the window ------ #
     windowBeans = sg.Window("PyCoffee", layoutBeans, margins=(
-        5, 5), no_titlebar=False, finalize=True)
+        5, 5), no_titlebar=False, finalize=True, size=screen_size)
 
     # ------ Focus Event Binding from Thinker on PySimpleGUI "Beans Origins" text inputs ------ #
     # Blocks any Focus on the window opening, so the first click also clears default text

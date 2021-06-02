@@ -2,7 +2,7 @@ import PySimpleGUI as sg
 import pandas as pd
 import hashlib
 
-def main():
+def main(screen_size=(300, 600)):
     # GUI Settings
     sg.theme('DarkAmber')
     base_font = ('Any 15')
@@ -40,7 +40,9 @@ def main():
 
     window = sg.Window('Login', layout,
                     text_justification='center',
-                    grab_anywhere=False)
+                    element_justification='center',
+                    grab_anywhere=False,
+                    size=screen_size)
 
     while True:
         event, values = window.read()
