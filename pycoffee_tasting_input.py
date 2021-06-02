@@ -93,17 +93,17 @@ def_txs=["Země - Kenya, Brazil...",
 spininput_size = (29, 1)
 # --- Slider input --- #
 # Size of the actual slider in characters, first number is width, second number is high
-sliderinput_size = (38, 20)
-slidertext_size = (7, 1)      # Size of text above the slider
+sliderinput_size = (20, 20)
+slidertext_size = (10, 1)      # Size of text above the slider
 slidercount_size = (4, 1)     # Size of counters of current value on slider
 
 # Buttons
-buttons = [sg.Button(button_text='Jde se ochutnávat!',
-                     tooltip='Kliknutím přejdeš na známkování chuti', font=base_font,
-                     mouseover_colors=('sienna1','OrangeRed4') ),
-           sg.Button(button_text='Zpět',
+buttons = [[sg.Button(button_text='Jde se ochutnávat!', key='Next', auto_size_button=None,
+                     tooltip='Kliknutím přejdeš na známkování chuti', font=('Any 24'),
+                     mouseover_colors=('sienna1','OrangeRed4') )],
+           [sg.Button(button_text='Zpět', bind_return_key=True, key='Back',
                      tooltip='Kliknutím se vrátíš na login', font=base_font,
-                     mouseover_colors=('sienna1','OrangeRed4'))]
+                     mouseover_colors=('sienna1','OrangeRed4'))]]
 
 # ------ "Beans" Layout Definition ------ #
 layoutBeans = [
@@ -128,14 +128,13 @@ layoutBeans = [
              '               Polotmavé pražení',
              '               Tmavé pražení'],
          initial_value='               Střední pražení',
-         size=spininput_size,
          font=base_font,
-         pad=((0,0),(10,10)))],
+         pad=((5,5),(10,10)))],
      # -- Slider with Arabica/Robusta ratio -- *
      [sg.Text('0', key='_LEFT_', size=slidercount_size, font=base_font),                     # Robusta counter
-      sg.Text('Robusta', size=slidertext_size, font=base_font,                               # Robusta name
+      sg.Text('Robusta   ', size=slidertext_size, font=base_font,                               # Robusta name
               justification=base_align),
-      sg.Text('Arabica', size=slidertext_size, font=base_font,                               # Arabica name
+      sg.Text('   Arabica', size=slidertext_size, font=base_font,                               # Arabica name
               justification=base_align),
       sg.Text('100', key='_RIGHT_', size=slidercount_size, font=base_font)],                 # Arabica counter
      [sg.Slider(key='Type', range=(0, 100), resolution=5, orientation='h',
@@ -146,10 +145,10 @@ layoutBeans = [
                 trough_color='sienna1')],
      
      # ---- Fancy frame ends here ---- #
-     ], element_justification='center')],
+     ], element_justification=base_align)],
     
     # ---- Buttons to submit and go for the next page OR return back---- #
-    [sg.Column([buttons], justification=base_align)]]
+    [sg.Column(buttons, justification=base_align, key='ColumnButtons', element_justification=base_align)]]
 
 
 # ------ Create the window ------ #
@@ -161,6 +160,15 @@ windowBeans = sg.Window("PyCoffee", layoutBeans, margins=(
 windowBeans[keys[0]].block_focus(block=True)
 # Binds generating of Focus Events on text input fields created from list <keys>
 [windowBeans[key].bind('<FocusIn>', '+FOCUS IN+') for key in keys]
+
+#[windowBeans[key].expand(expand_x = True) for key in keys]
+#windowBeans['RoastLevel'].expand(expand_x = True)
+#windowBeans['Type'].expand(expand_x = True)
+#windowBeans['ColumnButtons'].expand(expand_x = True)
+#windowBeans['Next'].expand(expand_x = True)
+#windowBeans['Back'].expand(expand_x = True)
+[windowBeans[key].expand(expand_x = True) for key in ['Country','Name','Roaster',
+            'Processing','Variety','Type','RoastLevel','ColumnButtons','Next','Back']]
 
 
 # ------ Create an event loop ------ #
@@ -198,7 +206,7 @@ while True:
         print(values)
         break
     # -- End program if User closes window -- #
-    if event in (sg.WIN_CLOSED, 'Exit', 'Zpět'):
+    if event in (sg.WIN_CLOSED, 'Exit', 'Back'):
         break
 
 windowBeans.close()
