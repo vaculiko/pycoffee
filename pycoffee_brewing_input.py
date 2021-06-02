@@ -67,12 +67,12 @@ def_txs=["Příprava – espresso, V60, Aeropress...",
 
 
 # Buttons
-buttons = [sg.Button(button_text='Jde se ochutnávat!',
-                     tooltip='Kliknutím přejdeš na známkování chuti', font=base_font,
-                     mouseover_colors=('sienna1','OrangeRed4') ),
-           sg.Button(button_text='Zpět',
+buttons = [[sg.Button(button_text='Jde se ochutnávat!', key='Next', auto_size_button=None,
+                     tooltip='Kliknutím přejdeš na známkování chuti', font=('Any 24'),
+                     mouseover_colors=('sienna1','OrangeRed4') )],
+           [sg.Button(button_text='Zpět', bind_return_key=True, key='Back',
                      tooltip='Kliknutím se vrátíš na login', font=base_font,
-                     mouseover_colors=('sienna1','OrangeRed4'))]
+                     mouseover_colors=('sienna1','OrangeRed4'))]]
 
 # ------ "Beans" Layout Definition ------ #
 layoutBeans = [
@@ -90,7 +90,7 @@ layoutBeans = [
      ], element_justification='center')],
     
     # ---- Buttons to submit and go for the next page OR return back---- #
-    [sg.Column([buttons], justification=base_align)]]
+    [sg.Column(buttons, justification=base_align, key='ColumnButtons', element_justification=base_align)]]
 
 
 # ------ Create the window ------ #
@@ -102,6 +102,9 @@ windowBeans = sg.Window("PyCoffee", layoutBeans, margins=(
 windowBeans[keys[0]].block_focus(block=True)
 # Binds generating of Focus Events on text input fields created from list <keys>
 [windowBeans[key].bind('<FocusIn>', '+FOCUS IN+') for key in keys]
+
+# ------ Expands Elements to fit the width of window ------ #
+[windowBeans[key].expand(expand_x = True) for key in ['BrewingMethod','BrewingRecipe','ColumnButtons','Next','Back']]
 
 
 # ------ Create an event loop ------ #
@@ -131,11 +134,11 @@ while True:
         if event == (key+'+FOCUS IN+') and values[key] == def_txs[keys.index(key)]:       
             windowBeans[key].update('')       
     # -- If User presses the "Jde se ochutnávat!" button, open next Windows -- #
-    if event in ("Jde se ochutnávat!"):
+    if event in ('Next'):
         print(values)
         break
     # -- End program if User closes window -- #
-    if event in (sg.WIN_CLOSED, 'Exit', 'Zpět'):
+    if event in (sg.WIN_CLOSED, 'Exit', 'Back'):
         break
 
 windowBeans.close()
