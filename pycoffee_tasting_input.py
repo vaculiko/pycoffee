@@ -89,21 +89,13 @@ def main(username='TestGUI_3.4', screen_size=(300, 600)):
                "Zpracování - natural, washed...",
                "Odrůda - Heirloom, Tabi..."]
 
-    # --- Spin input --- #
-    spininput_size = (29, 1)
-    # --- Slider input --- #
-    # Size of the actual slider in characters, first number is width, second number is high
-    sliderinput_size = (38, 20)
-    slidertext_size = (7, 1)      # Size of text above the slider
-    slidercount_size = (4, 1)     # Size of counters of current value on slider
-
-    # Buttons
-    buttons = [sg.Button(button_text='Jde se ochutnávat!',
-                         tooltip='Kliknutím přejdeš na známkování chuti', font=base_font,
-                         mouseover_colors=('sienna1', 'OrangeRed4')),
-               sg.Button(button_text='Zpět',
-                         tooltip='Kliknutím se vrátíš na login', font=base_font,
-                         mouseover_colors=('sienna1', 'OrangeRed4'))]
+    # ---- Buttons ---- #
+    buttons = [[sg.Button(button_text='Jde se ochutnávat!', key='Next', auto_size_button=None,
+                     tooltip='Kliknutím přejdeš na známkování chuti', font=('Any 24'),
+                     mouseover_colors=('sienna1','OrangeRed4') )],
+           [sg.Button(button_text='Zpět', bind_return_key=True, key='Back',
+                     tooltip='Kliknutím se vrátíš na login', font=base_font,
+                     mouseover_colors=('sienna1','OrangeRed4'))]]
 
     # ------ "Beans" Layout Definition ------ #
     layoutBeans = [
@@ -129,16 +121,15 @@ def main(username='TestGUI_3.4', screen_size=(300, 600)):
                     '               Polotmavé pražení',
                     '               Tmavé pražení'],
                 initial_value='               Střední pražení',
-                size=spininput_size,
                 font=base_font,
-                pad=((0, 0), (10, 10)))],
+                pad=((5, 5), (10, 10)))],
             # -- Slider with Arabica/Robusta ratio -- *
-            [sg.Text('0', key='_LEFT_', size=slidercount_size, font=base_font),                     # Robusta counter
-             sg.Text('Robusta', size=slidertext_size, font=base_font,                               # Robusta name
-                     justification=base_align),
-             sg.Text('Arabica', size=slidertext_size, font=base_font,                               # Arabica name
-                     justification=base_align),
-             sg.Text('100', key='_RIGHT_', size=slidercount_size, font=base_font)],                 # Arabica counter
+            [sg.Text('0', key='_LEFT_', font=base_font),                     # Robusta counter
+             sg.Text('Robusta', font=base_font, key='Robusta',               # Robusta name
+                     justification='left'),
+             sg.Text('Arabica', font=base_font, key='Arabica',               # Arabica name
+                     justification='right'),
+             sg.Text('100', key='_RIGHT_', font=base_font)],                 # Arabica counter
             [sg.Slider(key='Type', range=(0, 100), resolution=5, orientation='h',
                        disable_number_display=True, default_value=100, font=base_font, enable_events=True,
                        border_width=2,
@@ -150,7 +141,7 @@ def main(username='TestGUI_3.4', screen_size=(300, 600)):
         ], element_justification='center')],
 
         # ---- Buttons to submit and go for the next page OR return back---- #
-        [sg.Column([buttons], justification=base_align)]]
+        [sg.Column(buttons, justification=base_align, key='ColumnButtons', element_justification=base_align)]]
 
     # ------ Create the window ------ #
     windowBeans = sg.Window("PyCoffee", layoutBeans, margins=(
@@ -161,6 +152,11 @@ def main(username='TestGUI_3.4', screen_size=(300, 600)):
     windowBeans[keys[0]].block_focus(block=True)
     # Binds generating of Focus Events on text input fields created from list <keys>
     [windowBeans[key].bind('<FocusIn>', '+FOCUS IN+') for key in keys]
+    
+    # ------ Expands Elements to fit the width of window ------ #
+    [windowBeans[key].expand(expand_x = True) for key in ['Country','Name','Roaster', 'Robusta',
+            'Arabica', 'Processing','Variety','Type','RoastLevel','ColumnButtons','Next','Back']]
+
 
     # ------ Create an event loop ------ #
     '''
@@ -193,11 +189,11 @@ def main(username='TestGUI_3.4', screen_size=(300, 600)):
             windowBeans.Element('_LEFT_').Update(100-int(values['Type']))
             windowBeans.Element('_RIGHT_').Update(int(values['Type']))
         # -- If User presses the "Jde se ochutnávat!" button, open next Windows -- #
-        if event in ("Jde se ochutnávat!"):
+        if event in ('Next'):
             # print(values)
             break
         # -- End program if User closes window -- #
-        if event in (sg.WIN_CLOSED, 'Exit', 'Zpět'):
+        if event in (sg.WIN_CLOSED, 'Exit', 'Back'):
             break
 
     windowBeans.close()
