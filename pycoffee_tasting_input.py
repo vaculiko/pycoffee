@@ -154,8 +154,8 @@ def main(username='TestGUI_3.4', screen_size=(300, 600)):
     [windowBeans[key].bind('<FocusIn>', '+FOCUS IN+') for key in keys]
     
     # ------ Expands Elements to fit the width of window ------ #
-    [windowBeans[key].expand(expand_x = True) for key in ['Country','Name','Roaster', 'Robusta',
-            'Arabica', 'Processing','Variety','Type','RoastLevel','ColumnButtons','Next','Back']]
+    [windowBeans[key].expand(expand_x = True) for key in keys + ['Robusta',
+            'Arabica','Type','RoastLevel','ColumnButtons','Next','Back']]
 
 
     # ------ Create an event loop ------ #
