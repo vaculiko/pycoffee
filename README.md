@@ -28,17 +28,18 @@ Python based web app for coffee tasting with taste profile visualization and com
   - **Variety** - Heirloom, Tabi, Bourbon, Caturra,...
   - **Brewing Method** - espresso, V60, Aeropress, moka, frenchpress, phin,...
   - **Brewing Recipe** - inverted aeropress, ristretto, 40:60 dripper,...
-- **Tasting** (details in progress)
-  - **Rating** - bad to excellent (1-10)
-  - **Acidity** - low to high (1-10)
-  - _Zemitost_
-  - _Intenzita_
-  - **Sweetness**
-  - ...
-  - **Note** - optional text input
+- **Tasting**
+  - **Rating (Hodnocení)** - bad to excellent (1-10)
+  - **Sour (Kyselá)** - low to high (1-10)
+  - **Sweet (Sladká)**
+  - **Salty (Slaná)**
+  - **Bitter (Hořká)**
+  - **Note (Poznámka)** - optional text input
 
 ## Resources
 
+- Tasting
+  - [Proč a jak degustovat kávu?](https://coffeetohome.cz/proc-a-jak-degustovat-kavu)
 - GUI
   - [PySimpleGUI Demos](https://github.com/PySimpleGUI/PySimpleGUI/tree/master/DemoPrograms)
   - [PySimpleGUI Playlist](https://youtube.com/playlist?list=PLl8dD0doyrvF1nLakJJ7sl8OX2YSHclqn)
