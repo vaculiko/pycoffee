@@ -27,16 +27,14 @@ There are currently two buttons:
 # Button to returning to the previous page.
 --------------------------
 ToDo:
-# Podmínka pro vytvoření/nevytvoření Headerů, pokud soubor headery neobsahuje/obsahuje (soubor vždy existuje)
-# Přidat pamatování si předchozích textových inputů, když uživatel rozklikne, nabídne se mu, co psal dříve. Třeba 5 nejčastějších.
-# Vyrobit akci na tlačítku Zpět :D
-# Hezká grafika
+# kyselost = sour, hořkost = bitter, sweet = sladnost, salty = slanost
 """
 
-cols = ["Celkové hodnocení", "Acidita", "Zemitost", "Intenzita", "Sladkost", "Poznámka"] 
+cols = ["Celkové hodnocení", "Kyselost", "Hořkost", "Sladnost", "Slanost", "Poznámka"] 
 df = pd.DataFrame(columns=cols)  # Initialize dataframe
 
-username = 'TestGUI_3.4'
+username = 'TestGUI_3.7'
+screen_size=(300, 600)
 
 # ------ Menu Definition ------ #
 menu_def = [['&Account', ['&Open', '&Save', 'E&xit', 'Properties']],
@@ -49,62 +47,64 @@ base_font = ('Any 15')
 base_align = 'center'   # For justification parameter = horizontal alignment of elements
 
 # ---- Function for generating text inputs & enabling of easy formatting for Beans Origin section ---- #
-def BeansOrigin(key_sp, def_text):
-    return [sg.Input(key=key_sp,
-                     default_text=def_text,
-                     tooltip=def_text[:def_text.index(' ')],
-                     size=(30, 1),              # Size of the text input field
-                     font=('Any 15'),
-                     justification='center',     # Alignment of text in the input field
-                     pad=((0,0),(10,10)),
-                     border_width=10)]
+def Rating(key_sp, def_text):
+    return [sg.Column(layout=[[sg.Text(def_text, font=base_font)],
+            [sg.Slider(range=(1, 5), resolution=1, orientation='h',
+                      key=key_sp, tooltip=def_text, tick_interval=1,
+                      size=(3,15),
+                      disable_number_display=True, default_value=3,
+                      font=('Any 8'), border_width=2, relief='ridge',
+                      background_color='OrangeRed4', trough_color='sienna1')]],
+                      key=key_sp+'SLD', justification=base_align, element_justification=base_align)]
+                      
 
 # -- Lists of keys and defaults text for text input fields for Beans Origin section -- #
-keys=['BrewingMethod','BrewingRecipe']
-def_txs=["Příprava – espresso, V60, Aeropress...",
-         "Postup - inverted aeropress, ristretto, 40:60 dripper..."]
+keys=['GeneralRating','Sour','Bitter','Sweet','Salty']
+def_txs=["Celkové hodnocení",
+         "Kyselost",
+         "Hořkost",
+         "Sladkost",
+         "Slanost"]
 
 
-# Buttons
-buttons = [[sg.Button(button_text='Jde se ochutnávat!', key='Next', auto_size_button=None,
-                     tooltip='Kliknutím přejdeš na známkování chuti', font=('Any 24'),
+# ---- Buttons ---- #
+buttons = [[sg.Button(button_text='Uložit', key='Save', auto_size_button=None,
+                     tooltip='Kliknutím přejdeš na známkování chuti', font=('Any 20'),
                      mouseover_colors=('sienna1','OrangeRed4') )],
            [sg.Button(button_text='Zpět', bind_return_key=True, key='Back',
                      tooltip='Kliknutím se vrátíš na login', font=base_font,
                      mouseover_colors=('sienna1','OrangeRed4'))]]
 
-# ------ "Beans" Layout Definition ------ #
-layoutBeans = [
+# ------ "Rating" Layout Definition ------ #
+layoutRating = [
     # ---- Menu, for future use, momentarily just for show ---- #
     [sg.Menu(menu_def, tearoff=True)],
     
-    # ---- Fancy frame and title ---- #
-    [sg.Frame('', layout=[
-     [sg.Text('Příprava', font=base_font)],
-     
-     # ---- Generated "Beans Origin" text input fields: ---- #
-     [sg.Column(layout=[BeansOrigin(key_sp,def_text) for key_sp,def_text in [(keys[i],def_txs[i]) for i in range(len(keys))]])],
-                      
-     # ---- Fancy frame ends here ---- #
-     ], element_justification='center')],
+    # ---- Generated "Rating" sliders: ---- #
+    [Rating(key_sp,def_text) for key_sp,def_text in [(keys[i],def_txs[i]) for i in range(len(keys))]],
     
+    # ---- Text input field for Sidenote: ---- #
+    [sg.Input(key='Sidenote', default_text='Poznámka', tooltip='Poznámka',
+              font=base_font, justification=base_align, pad=((0, 0), (10, 10)),
+              border_width=10)],
+        
     # ---- Buttons to submit and go for the next page OR return back---- #
     [sg.Column(buttons, justification=base_align, key='ColumnButtons', element_justification=base_align)]]
 
 
 # ------ Create the window ------ #
-windowBeans = sg.Window("PyCoffee", layoutBeans, margins=(
-    5, 5), no_titlebar=False, finalize=True)
+windowRating = sg.Window("PyCoffee", layoutRating, margins=(
+    5, 5), no_titlebar=False, finalize=True, size=screen_size)
 
 # ------ Focus Event Binding from Thinker on PySimpleGUI "Beans Origins" text inputs ------ #
 # Blocks any Focus on the window opening, so the first click also clears default text
-windowBeans[keys[0]].block_focus(block=True)
+windowRating[keys[0]].block_focus(block=True)
 # Binds generating of Focus Events on text input fields created from list <keys>
-[windowBeans[key].bind('<FocusIn>', '+FOCUS IN+') for key in keys]
+[windowRating[key].bind('<FocusIn>', '+FOCUS IN+') for key in keys]
 
 # ------ Expands Elements to fit the width of window ------ #
-[windowBeans[key].expand(expand_x = True) for key in keys + ['ColumnButtons','Next','Back']]
-
+[windowRating[key].expand(expand_x = True) for key in keys + ['Sidenote','ColumnButtons','Save','Back']
+                                                           + [key+'SLD' for key in keys]]
 
 # ------ Create an event loop ------ #
 '''
@@ -127,20 +127,20 @@ For every text input field there is also <default text> in the text input field
 -----------------
 '''
 while True:
-    event, values = windowBeans.read()
+    event, values = windowRating.read()
     # -- Clear default text of the text input field on Focus -- #
     for key in keys:      
         if event == (key+'+FOCUS IN+') and values[key] == def_txs[keys.index(key)]:       
-            windowBeans[key].update('')       
+            windowRating[key].update('')       
     # -- If User presses the "Jde se ochutnávat!" button, open next Windows -- #
-    if event in ('Next'):
+    if event in ('Save'):
         print(values)
         break
     # -- End program if User closes window -- #
     if event in (sg.WIN_CLOSED, 'Exit', 'Back'):
         break
 
-windowBeans.close()
+windowRating.close()
 
 
 # ------ Console input for tasting info ------ #
