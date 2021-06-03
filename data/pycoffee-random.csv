@@ -1,4 +1,4 @@
-Date,User,Country,Name,Processing,Roaster,BrewingMethod,BrewingRecipe,Rating,Acidita,Zemitost,Intenzita,Sladkost,Poznámka
+Date,User,Country,Name,Processing,Roaster,BrewingMethod,BrewingRecipe,Rating,Sour,Sweet,Salty,Bitter,Note
 2021-05-27,Aestas,Kenya,Palmichal,Honey,Father's,V60,bbb,1,5,1,5,4,
 2021-05-27,Aestas,Kenya,Cadexsa,Natural,Naughty dog,Moka,aaa,5,2,5,4,2,
 2021-05-27,Talon,Kenya,,Natural,Monogram,Frenchpress,ccc,3,2,2,3,1,
