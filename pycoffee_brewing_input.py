@@ -104,7 +104,7 @@ windowBeans[keys[0]].block_focus(block=True)
 [windowBeans[key].bind('<FocusIn>', '+FOCUS IN+') for key in keys]
 
 # ------ Expands Elements to fit the width of window ------ #
-[windowBeans[key].expand(expand_x = True) for key in ['BrewingMethod','BrewingRecipe','ColumnButtons','Next','Back']]
+[windowBeans[key].expand(expand_x = True) for key in keys + ['ColumnButtons','Next','Back']]
 
 
 # ------ Create an event loop ------ #
