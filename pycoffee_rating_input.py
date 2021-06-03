@@ -33,10 +33,10 @@ ToDo:
 # Hezká grafika
 """
 
-cols = ["BrewingMethod", "BrewingRecipe"] 
+cols = ["Celkové hodnocení", "Acidita", "Zemitost", "Intenzita", "Sladkost", "Poznámka"] 
 df = pd.DataFrame(columns=cols)  # Initialize dataframe
 
-username = 'TestGUI_3.6'
+username = 'TestGUI_3.4'
 
 # ------ Menu Definition ------ #
 menu_def = [['&Account', ['&Open', '&Save', 'E&xit', 'Properties']],
@@ -49,7 +49,7 @@ base_font = ('Any 15')
 base_align = 'center'   # For justification parameter = horizontal alignment of elements
 
 # ---- Function for generating text inputs & enabling of easy formatting for Beans Origin section ---- #
-def BrewingSpecs(key_sp, def_text):
+def BeansOrigin(key_sp, def_text):
     return [sg.Input(key=key_sp,
                      default_text=def_text,
                      tooltip=def_text[:def_text.index(' ')],
@@ -73,8 +73,8 @@ buttons = [[sg.Button(button_text='Jde se ochutnávat!', key='Next', auto_size_b
                      tooltip='Kliknutím se vrátíš na login', font=base_font,
                      mouseover_colors=('sienna1','OrangeRed4'))]]
 
-# ------ "Brewing" Layout Definition ------ #
-layoutBrew = [
+# ------ "Beans" Layout Definition ------ #
+layoutBeans = [
     # ---- Menu, for future use, momentarily just for show ---- #
     [sg.Menu(menu_def, tearoff=True)],
     
@@ -83,7 +83,7 @@ layoutBrew = [
      [sg.Text('Příprava', font=base_font)],
      
      # ---- Generated "Beans Origin" text input fields: ---- #
-     [sg.Column(layout=[BrewingSpecs(key_sp,def_text) for key_sp,def_text in [(keys[i],def_txs[i]) for i in range(len(keys))]])],
+     [sg.Column(layout=[BeansOrigin(key_sp,def_text) for key_sp,def_text in [(keys[i],def_txs[i]) for i in range(len(keys))]])],
                       
      # ---- Fancy frame ends here ---- #
      ], element_justification='center')],
@@ -93,17 +93,17 @@ layoutBrew = [
 
 
 # ------ Create the window ------ #
-windowBrew = sg.Window("PyCoffee", layoutBrew, margins=(
+windowBeans = sg.Window("PyCoffee", layoutBeans, margins=(
     5, 5), no_titlebar=False, finalize=True)
 
 # ------ Focus Event Binding from Thinker on PySimpleGUI "Beans Origins" text inputs ------ #
 # Blocks any Focus on the window opening, so the first click also clears default text
-windowBrew[keys[0]].block_focus(block=True)
+windowBeans[keys[0]].block_focus(block=True)
 # Binds generating of Focus Events on text input fields created from list <keys>
-[windowBrew[key].bind('<FocusIn>', '+FOCUS IN+') for key in keys]
+[windowBeans[key].bind('<FocusIn>', '+FOCUS IN+') for key in keys]
 
 # ------ Expands Elements to fit the width of window ------ #
-[windowBrew[key].expand(expand_x = True) for key in keys + ['ColumnButtons','Next','Back']]
+[windowBeans[key].expand(expand_x = True) for key in keys + ['ColumnButtons','Next','Back']]
 
 
 # ------ Create an event loop ------ #
@@ -127,11 +127,11 @@ For every text input field there is also <default text> in the text input field
 -----------------
 '''
 while True:
-    event, values = windowBrew.read()
+    event, values = windowBeans.read()
     # -- Clear default text of the text input field on Focus -- #
     for key in keys:      
         if event == (key+'+FOCUS IN+') and values[key] == def_txs[keys.index(key)]:       
-            windowBrew[key].update('')       
+            windowBeans[key].update('')       
     # -- If User presses the "Jde se ochutnávat!" button, open next Windows -- #
     if event in ('Next'):
         print(values)
@@ -140,7 +140,7 @@ while True:
     if event in (sg.WIN_CLOSED, 'Exit', 'Back'):
         break
 
-windowBrew.close()
+windowBeans.close()
 
 
 # ------ Console input for tasting info ------ #

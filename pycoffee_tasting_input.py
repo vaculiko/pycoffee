@@ -1,4 +1,3 @@
-import os
 from tkinter.constants import CENTER
 from types import resolve_bases
 from warnings import resetwarnings
@@ -51,7 +50,7 @@ ToDo:
 """
 
 
-def main(username='TestGUI_3.4', screen_size=(300, 600)):
+def main(username='TestGUI_3.6', screen_size=(300, 600)):
     # ------ Database Definition ------ #
     # Entry info: date, user
     # Bean info: Country, Name, Roaster, Processing, Roast Level, Type, Variety, Brewing Method, Brewing Recipe
@@ -90,7 +89,7 @@ def main(username='TestGUI_3.4', screen_size=(300, 600)):
                "Odrůda - Heirloom, Tabi..."]
 
     # ---- Buttons ---- #
-    buttons = [[sg.Button(button_text='Jde se ochutnávat!', key='Next', auto_size_button=None,
+    buttons = [[sg.Button(button_text='Vybrat přípravu', key='Next', auto_size_button=None,
                      tooltip='Kliknutím přejdeš na známkování chuti', font=('Any 24'),
                      mouseover_colors=('sienna1','OrangeRed4') )],
            [sg.Button(button_text='Zpět', bind_return_key=True, key='Back',
@@ -115,12 +114,12 @@ def main(username='TestGUI_3.4', screen_size=(300, 600)):
             [sg.Spin(
                 key='RoastLevel',
                 values=[
-                    '               Světlé pražení',
-                    '               Polosvětlé pražení',
-                    '               Střední pražení',
-                    '               Polotmavé pražení',
-                    '               Tmavé pražení'],
-                initial_value='               Střední pražení',
+                    '         Světlé pražení',
+                    '         Polosvětlé pražení',
+                    '         Střední pražení',
+                    '         Polotmavé pražení',
+                    '         Tmavé pražení'],
+                initial_value='         Střední pražení',
                 font=base_font,
                 pad=((5, 5), (10, 10)))],
             # -- Slider with Arabica/Robusta ratio -- *
@@ -188,7 +187,7 @@ def main(username='TestGUI_3.4', screen_size=(300, 600)):
         if event == 'Type':
             windowBeans.Element('_LEFT_').Update(100-int(values['Type']))
             windowBeans.Element('_RIGHT_').Update(int(values['Type']))
-        # -- If User presses the "Jde se ochutnávat!" button, open next Windows -- #
+        # -- If User presses the "Vybrat přípravu" button, open next Windows -- #
         if event in ('Next'):
             # print(values)
             break
