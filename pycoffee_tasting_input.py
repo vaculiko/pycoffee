@@ -50,7 +50,7 @@ ToDo:
 """
 
 
-def main(username='TestGUI_3.6', screen_size=(300, 600)):
+def main(username='TestGUI_3.7', screen_size=(300, 600)):
     # ------ Database Definition ------ #
     # Entry info: date, user
     # Bean info: Country, Name, Roaster, Processing, Roast Level, Type, Variety, Brewing Method, Brewing Recipe
@@ -75,8 +75,8 @@ def main(username='TestGUI_3.6', screen_size=(300, 600)):
                          tooltip=def_text[:def_text.index(' ')],
                          # Size of the text input field
                          size=(30, 1),
-                         font=('Any 15'),
-                         justification='center',     # Alignment of text in the input field
+                         font=base_font,
+                         justification=base_align,     # Alignment of text in the input field
                          pad=((0, 0), (10, 10)),
                          border_width=10)]
 

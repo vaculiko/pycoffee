@@ -36,7 +36,7 @@ ToDo:
 cols = ["BrewingMethod", "BrewingRecipe"] 
 df = pd.DataFrame(columns=cols)  # Initialize dataframe
 
-username = 'TestGUI_3.6'
+username = 'TestGUI_3.7'
 
 # ------ Menu Definition ------ #
 menu_def = [['&Account', ['&Open', '&Save', 'E&xit', 'Properties']],
@@ -82,7 +82,7 @@ layoutBrew = [
     [sg.Frame('', layout=[
      [sg.Text('Příprava', font=base_font)],
      
-     # ---- Generated "Beans Origin" text input fields: ---- #
+     # ---- Generated "Brewing" text input fields: ---- #
      [sg.Column(layout=[BrewingSpecs(key_sp,def_text) for key_sp,def_text in [(keys[i],def_txs[i]) for i in range(len(keys))]])],
                       
      # ---- Fancy frame ends here ---- #
