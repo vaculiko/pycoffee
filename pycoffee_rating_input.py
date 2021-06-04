@@ -1,9 +1,9 @@
+import os
 from tkinter.constants import CENTER
 from types import resolve_bases
 from warnings import resetwarnings
 import pandas as pd
 import PySimpleGUI as sg
-from datetime import date
 from pathlib import Path
 
 """
@@ -30,7 +30,7 @@ ToDo:
 # kyselost = sour, hořkost = bitter, sweet = sladnost, salty = slanost
 """
 
-cols = ["Celkové hodnocení", "Kyselost", "Hořkost", "Sladnost", "Slanost", "Poznámka"] 
+cols = ["GeneralRating", "Sour", "Bitter", "Sweet", "Salty", "Sidenote"] 
 df = pd.DataFrame(columns=cols)  # Initialize dataframe
 
 username = 'TestGUI_3.7'
@@ -86,7 +86,7 @@ layoutRating = [
     # ---- Text input field for Sidenote: ---- #
     [sg.Input(key='Sidenote', default_text='Poznámka', tooltip='Poznámka',
               font=base_font, justification=base_align, pad=((0, 0), (10, 10)),
-              border_width=10)],
+              border_width=10, enable_events=True)],
         
     # ---- Buttons to submit and go for the next page OR return back---- #
     [sg.Column(buttons, justification=base_align, key='ColumnButtons', element_justification=base_align)]]
@@ -97,10 +97,10 @@ windowRating = sg.Window("PyCoffee", layoutRating, margins=(
     5, 5), no_titlebar=False, finalize=True, size=screen_size)
 
 # ------ Focus Event Binding from Thinker on PySimpleGUI "Beans Origins" text inputs ------ #
-# Blocks any Focus on the window opening, so the first click also clears default text
-windowRating[keys[0]].block_focus(block=True)
+# Blocks Focus for Sidenote on the window opening, so the first click on it also clears default text
+windowRating['Sidenote'].block_focus(block=True)
 # Binds generating of Focus Events on text input fields created from list <keys>
-[windowRating[key].bind('<FocusIn>', '+FOCUS IN+') for key in keys]
+windowRating['Sidenote'].bind('<FocusIn>', '+FOCUS IN+')
 
 # ------ Expands Elements to fit the width of window ------ #
 [windowRating[key].expand(expand_x = True) for key in keys + ['Sidenote','ColumnButtons','Save','Back']
@@ -130,8 +130,8 @@ while True:
     event, values = windowRating.read()
     # -- Clear default text of the text input field on Focus -- #
     for key in keys:      
-        if event == (key+'+FOCUS IN+') and values[key] == def_txs[keys.index(key)]:       
-            windowRating[key].update('')       
+        if event == ('Sidenote+FOCUS IN+') and values['Sidenote'] == 'Poznámka':       
+            windowRating['Sidenote'].update('')       
     # -- If User presses the "Jde se ochutnávat!" button, open next Windows -- #
     if event in ('Save'):
         print(values)
@@ -147,7 +147,7 @@ windowRating.close()
 def input_tasting():
     row_dict = {}
     for col in cols:
-        row_dict[col] = values[col].title()
+        row_dict[col] = values[col]
     return row_dict
 
 
@@ -160,6 +160,6 @@ Path('data').mkdir(parents=True, exist_ok=True)
 # -- Create database file with headers -- #
 # -- If database file already exists, append new data without headers #
 file = 'data/pycoffee-' + username + '.csv'
-hdr = False if file else True
+hdr = False if os.path.isfile(file) else True
 df.to_csv(file, mode='a', index=False, header=hdr)
 print(df)
