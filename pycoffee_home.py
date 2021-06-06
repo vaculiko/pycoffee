@@ -2,20 +2,23 @@ import PySimpleGUI as sg
 import pandas as pd
 from pandas.core.indexes import base
 
+# TODO: Pull info about brews (name, date) from all users and make it smart (load only needed columns)
+
 # define main function, can be used outside this script
-def main(user = 'random', screen_size=(300, 600)):
+def main(user, screen_size=(300, 600)):
     # import user database
     df = pd.read_csv(f'data/pycoffee-{user}.csv', header=0, index_col=0)
     total = df.shape[0] # number of brewed cups
     last_brew = df.tail(1) # details of last brew
-
+    if last_brew.empty: # prevent crashing if user has no brews
+        last_brew['User'] = ['---']
     sg.theme('DarkAmber')
     base_font = ('Any 15')
 
     layout = [[sg.Column(layout=[
         [sg.Text(f"Vítejte {user}!", font=base_font, size=(20,5))],
         [sg.Text(
-            f"Naši uživatelé uvařili celkem {df.shape[0]} šálků kávy.", font=base_font, size=(20,5))],
+            f"Naši uživatelé uvařili celkem {total} šálků kávy.", font=base_font, size=(20,5))],
         [sg.Text(
             f"Poslední šálek uvařil {last_brew['User'][0]} dne {last_brew.index[0]}.", font=base_font, size=(20,5))],
         [sg.Button('Jde se vařit', key='-brew-', font=base_font, size=(20,1))],
@@ -46,4 +49,4 @@ def main(user = 'random', screen_size=(300, 600)):
 
 if __name__ == "__main__":
     # execute only if launched from command line/opened directly
-    main()
+    main(user='Aestas')
