@@ -1,7 +1,4 @@
 import os
-from tkinter.constants import CENTER
-from types import resolve_bases
-from warnings import resetwarnings
 import pandas as pd
 import PySimpleGUI as sg
 from pathlib import Path
@@ -30,136 +27,124 @@ ToDo:
 # kyselost = sour, hořkost = bitter, sweet = sladnost, salty = slanost
 """
 
-cols = ["GeneralRating", "Sour", "Bitter", "Sweet", "Salty", "Sidenote"] 
-df = pd.DataFrame(columns=cols)  # Initialize dataframe
 
-username = 'TestGUI_3.7'
-screen_size=(300, 600)
+def main(screen_size=(300, 600)):
+    # ------ Menu Definition ------ #
+    menu_def = [['&Account', ['&Open', '&Save', 'E&xit', 'Properties']],
+                ['&History', ['Paste', ['Special', 'Normal', ], 'Undo'], ],
+                ['&Help', '&About...'], ]
 
-# ------ Menu Definition ------ #
-menu_def = [['&Account', ['&Open', '&Save', 'E&xit', 'Properties']],
-            ['&History', ['Paste', ['Special', 'Normal', ], 'Undo'], ],
-            ['&Help', '&About...'], ]
+    # ------ Global definitions ------ #
+    sg.theme('DarkAmber')
+    base_font = ('Any 15')
+    base_align = 'center'   # For justification parameter = horizontal alignment of elements
 
-# ------ Global definitions ------ #
-sg.theme('DarkAmber')
-base_font = ('Any 15')
-base_align = 'center'   # For justification parameter = horizontal alignment of elements
+    # ---- Function for generating text inputs & enabling of easy formatting for Beans Origin section ---- #
+    def Rating(key_sp, def_text):
+        return [sg.Column(layout=[[sg.Text(def_text, font=base_font)],
+                [sg.Slider(range=(1, 5), resolution=1, orientation='h',
+                           key=key_sp, tooltip=def_text, tick_interval=1,
+                           size=(3, 15),
+                           disable_number_display=True, default_value=3,
+                           font=('Any 8'), border_width=2, relief='ridge',
+                           background_color='OrangeRed4', trough_color='sienna1')]],
+            key=key_sp+'SLD', justification=base_align, element_justification=base_align)]
 
-# ---- Function for generating text inputs & enabling of easy formatting for Beans Origin section ---- #
-def Rating(key_sp, def_text):
-    return [sg.Column(layout=[[sg.Text(def_text, font=base_font)],
-            [sg.Slider(range=(1, 5), resolution=1, orientation='h',
-                      key=key_sp, tooltip=def_text, tick_interval=1,
-                      size=(3,15),
-                      disable_number_display=True, default_value=3,
-                      font=('Any 8'), border_width=2, relief='ridge',
-                      background_color='OrangeRed4', trough_color='sienna1')]],
-                      key=key_sp+'SLD', justification=base_align, element_justification=base_align)]
-                      
+    # -- Lists of keys and defaults text for text input fields for Beans Origin section -- #
+    keys = ['Rating', 'Sour', 'Bitter', 'Sweet', 'Salty']
+    def_txs = ["Celkové hodnocení",
+               "Kyselost",
+               "Hořkost",
+               "Sladkost",
+               "Slanost"]
 
-# -- Lists of keys and defaults text for text input fields for Beans Origin section -- #
-keys=['GeneralRating','Sour','Bitter','Sweet','Salty']
-def_txs=["Celkové hodnocení",
-         "Kyselost",
-         "Hořkost",
-         "Sladkost",
-         "Slanost"]
+    # ---- Buttons ---- #
+    buttons = [[sg.Button(button_text='Uložit', key='Save', auto_size_button=None,
+                          tooltip='Kliknutím přejdeš na známkování chuti', font=('Any 20'),
+                          mouseover_colors=('sienna1', 'OrangeRed4'))],
+               [sg.Button(button_text='Zpět', bind_return_key=True, key='Back',
+                          tooltip='Kliknutím se vrátíš na login', font=base_font,
+                          mouseover_colors=('sienna1', 'OrangeRed4'))]]
 
+    # ------ "Rating" Layout Definition ------ #
+    layoutRating = [
+        # ---- Menu, for future use, momentarily just for show ---- #
+        [sg.Menu(menu_def, tearoff=True)],
 
-# ---- Buttons ---- #
-buttons = [[sg.Button(button_text='Uložit', key='Save', auto_size_button=None,
-                     tooltip='Kliknutím přejdeš na známkování chuti', font=('Any 20'),
-                     mouseover_colors=('sienna1','OrangeRed4') )],
-           [sg.Button(button_text='Zpět', bind_return_key=True, key='Back',
-                     tooltip='Kliknutím se vrátíš na login', font=base_font,
-                     mouseover_colors=('sienna1','OrangeRed4'))]]
+        # ---- Generated "Rating" sliders: ---- #
+        [Rating(key_sp, def_text) for key_sp, def_text in [
+            (keys[i], def_txs[i]) for i in range(len(keys))]],
 
-# ------ "Rating" Layout Definition ------ #
-layoutRating = [
-    # ---- Menu, for future use, momentarily just for show ---- #
-    [sg.Menu(menu_def, tearoff=True)],
-    
-    # ---- Generated "Rating" sliders: ---- #
-    [Rating(key_sp,def_text) for key_sp,def_text in [(keys[i],def_txs[i]) for i in range(len(keys))]],
-    
-    # ---- Text input field for Sidenote: ---- #
-    [sg.Input(key='Sidenote', default_text='Poznámka', tooltip='Poznámka',
-              font=base_font, justification=base_align, pad=((0, 0), (10, 10)),
-              border_width=10, enable_events=True)],
-        
-    # ---- Buttons to submit and go for the next page OR return back---- #
-    [sg.Column(buttons, justification=base_align, key='ColumnButtons', element_justification=base_align)]]
+        # ---- Text input field for Note: ---- #
+        [sg.Input(key='Note', default_text='Poznámka', tooltip='Poznámka',
+                  font=base_font, justification=base_align, pad=(
+                      (0, 0), (10, 10)),
+                  border_width=10, enable_events=True)],
 
+        # ---- Buttons to submit and go for the next page OR return back---- #
+        [sg.Column(buttons, justification=base_align, key='ColumnButtons', element_justification=base_align)]]
 
-# ------ Create the window ------ #
-windowRating = sg.Window("PyCoffee", layoutRating, margins=(
-    5, 5), no_titlebar=False, finalize=True, size=screen_size)
+    # ------ Create the window ------ #
+    windowRating = sg.Window("PyCoffee", layoutRating, margins=(
+        5, 5), no_titlebar=False, finalize=True, size=screen_size)
 
-# ------ Focus Event Binding from Thinker on PySimpleGUI "Beans Origins" text inputs ------ #
-# Blocks Focus for Sidenote on the window opening, so the first click on it also clears default text
-windowRating['Sidenote'].block_focus(block=True)
-# Binds generating of Focus Events on text input fields created from list <keys>
-windowRating['Sidenote'].bind('<FocusIn>', '+FOCUS IN+')
+    # ------ Focus Event Binding from Thinker on PySimpleGUI "Beans Origins" text inputs ------ #
+    # Blocks Focus for Note on the window opening, so the first click on it also clears default text
+    windowRating['Note'].block_focus(block=True)
+    # Binds generating of Focus Events on text input fields created from list <keys>
+    windowRating['Note'].bind('<FocusIn>', '+FOCUS IN+')
 
-# ------ Expands Elements to fit the width of window ------ #
-[windowRating[key].expand(expand_x = True) for key in keys + ['Sidenote','ColumnButtons','Save','Back']
-                                                           + [key+'SLD' for key in keys]]
+    # ------ Expands Elements to fit the width of window ------ #
+    [windowRating[key].expand(expand_x=True) for key in keys + ['Note', 'ColumnButtons', 'Save', 'Back']
+     + [key+'SLD' for key in keys]]
 
-# ------ Create an event loop ------ #
-'''
-'Clear' For Loop Explanation
------------------
-<For loop> is used to check if any text input field was focused (selected by user).
-For every text input field there is a <key> matching entry from the list <keys>.
-For every text input field there is also <default text> in the text input field 
-(returned as <value> by window.read function) and it matches entry from the list
-<def_txs> on the same position as <key> in <keys>.
-    # E.g. on the first position of <keys> there is 'BrewingMethod', on first pozition of 
-    <def_txs> there is "Příprava – espresso, V60, Aeropress...".
-    So the text input field with <key> 'BrewingMethod' contains <default text> "Příprava – espresso, V60, Aeropress...".
+    # ------ Create an event loop ------ #
+    '''
+    'Clear' For Loop Explanation
+    -----------------
+    <For loop> is used to check if any text input field was focused (selected by user).
+    For every text input field there is a <key> matching entry from the list <keys>.
+    For every text input field there is also <default text> in the text input field 
+    (returned as <value> by window.read function) and it matches entry from the list
+    <def_txs> on the same position as <key> in <keys>.
+        # E.g. on the first position of <keys> there is 'BrewingMethod', on first pozition of 
+        <def_txs> there is "Příprava – espresso, V60, Aeropress...".
+        So the text input field with <key> 'BrewingMethod' contains <default text> "Příprava – espresso, V60, Aeropress...".
 
-<For loop> checks if for any <key> from <keys> the Focus Event was created (syntax is 
-<key+'+FOCUS IN+'> and it is generated by Focus Event Binding code above).
-    # If such Focus event was created (user klicked on thetext input field) and <value> of 
-      <key> (the text of the input field) matches entry from <def_txs> on the same position
-      (matches default text given by code), that value (default text) is deleted.
------------------
-'''
-while True:
-    event, values = windowRating.read()
-    # -- Clear default text of the text input field on Focus -- #
-    for key in keys:      
-        if event == ('Sidenote+FOCUS IN+') and values['Sidenote'] == 'Poznámka':       
-            windowRating['Sidenote'].update('')       
-    # -- If User presses the "Jde se ochutnávat!" button, open next Windows -- #
-    if event in ('Save'):
-        print(values)
-        break
-    # -- End program if User closes window -- #
-    if event in (sg.WIN_CLOSED, 'Exit', 'Back'):
-        break
-
-windowRating.close()
+    <For loop> checks if for any <key> from <keys> the Focus Event was created (syntax is 
+    <key+'+FOCUS IN+'> and it is generated by Focus Event Binding code above).
+        # If such Focus event was created (user klicked on thetext input field) and <value> of 
+        <key> (the text of the input field) matches entry from <def_txs> on the same position
+        (matches default text given by code), that value (default text) is deleted.
+    -----------------
+    '''
+    while True:
+        event, values = windowRating.read()
+        # -- Clear default text of the text input field on Focus -- #
+        for key in keys:
+            if event == ('Note+FOCUS IN+') and values['Note'] == 'Poznámka':
+                windowRating['Note'].update('')
+        # -- If User presses the "Jde se ochutnávat!" button, open next Windows -- #
+        if event in ('Save'):
+            windowRating.close()
+            return {key: values[key] for key in keys+['Note']}
+        # -- End program if User closes window -- #
+        if event in (sg.WIN_CLOSED, 'Exit', 'Back'):
+            break
 
 
-# ------ Console input for tasting info ------ #
-def input_tasting():
-    row_dict = {}
-    for col in cols:
-        row_dict[col] = values[col]
-    return row_dict
-
-
-# ------ Manual input ------ #
-# -- Generate dictionary and add it as new line to database-- #
-new_row = input_tasting()
-df = df.append(new_row, ignore_index=True)
-# -- Create data directory -- #
-Path('data').mkdir(parents=True, exist_ok=True)
-# -- Create database file with headers -- #
-# -- If database file already exists, append new data without headers #
-file = 'data/pycoffee-' + username + '.csv'
-hdr = False if os.path.isfile(file) else True
-df.to_csv(file, mode='a', index=False, header=hdr)
-print(df)
+if __name__ == "__main__":
+    cols = ["Rating", "Sour", "Bitter", "Sweet", "Salty", "Note"]
+    df = pd.DataFrame(columns=cols)  # Initialize dataframe
+    username = 'TestGUI_3.7'
+    new_row = main()
+    if new_row:  # continue only if new_row is not empty
+        df = df.append(new_row, ignore_index=True)
+        # -- Create data directory -- #
+        Path('data').mkdir(parents=True, exist_ok=True)
+        # -- Create database file with headers -- #
+        # -- If database file already exists, append new data without headers #
+        file = 'data/pycoffee-' + username + '.csv'
+        hdr = False if os.path.isfile(file) else True
+        df.to_csv(file, mode='a', index=False, header=hdr)
+        print(df)
