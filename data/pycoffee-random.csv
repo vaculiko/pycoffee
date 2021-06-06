@@ -1,52 +1,52 @@
-Date,User,Country,Name,Processing,Roaster,BrewingMethod,BrewingRecipe,Rating,Sour,Sweet,Salty,Bitter,Note
-2021-05-27,Aestas,Kenya,Palmichal,Honey,Father's,V60,bbb,1,5,1,5,4,
-2021-05-27,Aestas,Kenya,Cadexsa,Natural,Naughty dog,Moka,aaa,5,2,5,4,2,
-2021-05-27,Talon,Kenya,,Natural,Monogram,Frenchpress,ccc,3,2,2,3,1,
-2021-05-27,Zorin,Kenya,Kiyumba,Honey,Naughty dog,Espresso,aaa,4,5,1,4,1,
-2021-05-27,Talon,Brazil,Blend,Honey,Naughty dog,V60,aaa,1,2,3,1,2,
-2021-05-27,Zorin,Rwanda,Dambi Uddo,Honey,Father's,Espresso,ccc,2,3,1,5,2,
-2021-05-27,Cruduk,Honduras,Dambi Uddo,Carbon,Rebelbean,Moka,bbb,3,1,2,1,3,
-2021-05-27,Talon,Kenya,Cadexsa,Honey,Father's,Frenchpress,,4,2,3,2,2,
-2021-05-27,Talon,Brazil,Blend,Carbon,Naughty dog,Frenchpress,ccc,2,2,5,4,1,
-2021-05-27,Aestas,Honduras,Palmichal,Natural,Monogram,Frenchpress,aaa,4,4,5,4,5,
-2021-05-27,Aestas,Brazil,Palmichal,Washed,Monogram,Moka,ccc,3,1,3,4,2,
-2021-05-27,Aestas,Brazil,Palmichal,Honey,Naughty dog,V60,aaa,3,5,5,2,2,
-2021-05-27,Cruduk,Costa Rica,,Washed,Naughty dog,Espresso,,1,1,3,3,2,
-2021-05-27,Cruduk,Costa Rica,Kiranga,Washed,Monogram,Frenchpress,aaa,5,2,2,4,5,
-2021-05-27,Talon,Costa Rica,,Carbon,Father's,Moka,bbb,3,4,3,4,5,
-2021-05-27,Aestas,Honduras,Cadexsa,Washed,Rebelbean,Aeropress,bbb,5,2,1,1,1,
-2021-05-27,Aestas,Kenya,,Honey,Motmot,Moka,bbb,3,4,2,5,2,
-2021-05-27,Zorin,Honduras,,Carbon,Laura Coffee,V60,aaa,1,4,3,4,4,
-2021-05-27,Aestas,Brazil,Palmichal,Washed,Motmot,Frenchpress,ccc,1,2,2,2,5,
-2021-05-27,Cruduk,Ethipoia,Cadexsa,Honey,Laura Coffee,V60,aaa,4,5,1,1,5,
-2021-05-27,Aestas,Honduras,Cadexsa,Carbon,Laura Coffee,Frenchpress,bbb,4,1,2,4,1,
-2021-05-27,Talon,Ethipoia,Kiyumba,Carbon,Monogram,Moka,,2,2,3,2,1,
-2021-05-27,Aestas,Brazil,Kiyumba,Washed,Motmot,Moka,,5,5,2,1,5,
-2021-05-27,Cruduk,Kenya,Blend,Washed,Monogram,V60,,1,5,2,5,5,
-2021-05-27,Aestas,Ethipoia,Palmichal,Honey,Rebelbean,V60,ccc,2,3,4,2,3,
-2021-05-27,Talon,Kenya,Kiranga,Carbon,Naughty dog,Moka,aaa,1,5,2,5,3,
-2021-05-27,Talon,Kenya,Cadexsa,Honey,Rebelbean,V60,,5,3,5,5,1,
-2021-05-27,Talon,Brazil,Kiranga,Natural,Rebelbean,Aeropress,aaa,5,2,3,3,5,
-2021-05-27,Talon,Honduras,Palmichal,Honey,Naughty dog,Frenchpress,ccc,1,1,4,3,1,
-2021-05-27,Talon,Honduras,Palmichal,Honey,Father's,Frenchpress,,5,1,1,1,2,
-2021-05-27,Aestas,Rwanda,Blend,Natural,Laura Coffee,V60,aaa,3,3,1,3,2,
-2021-05-27,Aestas,Rwanda,,Carbon,Naughty dog,V60,bbb,2,2,4,1,2,
-2021-05-27,Zorin,Brazil,,Natural,Rebelbean,V60,aaa,4,1,4,2,2,
-2021-05-27,Talon,Rwanda,,Natural,Father's,Aeropress,bbb,4,3,3,1,3,
-2021-05-27,Zorin,Brazil,,Honey,Motmot,Aeropress,ccc,2,5,3,1,1,
-2021-05-27,Zorin,Rwanda,Palmichal,Honey,Laura Coffee,Moka,aaa,4,5,2,3,1,
-2021-05-27,Aestas,Costa Rica,,Natural,Rebelbean,Frenchpress,aaa,3,5,3,1,3,
-2021-05-27,Talon,Brazil,Dambi Uddo,Honey,Laura Coffee,Espresso,bbb,2,4,4,2,5,
-2021-05-27,Talon,Ethipoia,Blend,Washed,Rebelbean,Espresso,bbb,4,5,5,3,4,
-2021-05-27,Zorin,Brazil,Cadexsa,Carbon,Monogram,V60,aaa,3,5,5,3,1,
-2021-05-27,Talon,Honduras,,Natural,Father's,Aeropress,aaa,2,4,5,1,4,
-2021-05-27,Cruduk,Brazil,Palmichal,Carbon,Laura Coffee,Frenchpress,bbb,2,1,1,4,2,
-2021-05-27,Zorin,Kenya,Blend,Natural,Motmot,Frenchpress,bbb,4,5,5,5,3,
-2021-05-27,Zorin,Costa Rica,Dambi Uddo,Natural,Monogram,Frenchpress,,3,2,3,5,4,
-2021-05-27,Talon,Ethipoia,Kiranga,Honey,Father's,Espresso,ccc,3,5,1,2,2,
-2021-05-27,Zorin,Brazil,Cadexsa,Natural,Motmot,Frenchpress,,3,5,4,4,1,
-2021-05-27,Zorin,Ethipoia,,Washed,Naughty dog,Frenchpress,,1,3,3,4,4,
-2021-05-27,Cruduk,Ethipoia,Cadexsa,Honey,Laura Coffee,Frenchpress,aaa,4,3,4,2,4,
-2021-05-27,Aestas,Ethipoia,Blend,Washed,Motmot,Frenchpress,bbb,4,2,1,3,4,
-2021-05-27,Cruduk,Ethipoia,Kiyumba,Honey,Laura Coffee,Espresso,,3,1,4,1,5,
-2021-05-27,Talon,Honduras,Palmichal,Washed,Monogram,Aeropress,aaa,2,2,1,5,2,
+Date,User,Country,Name,Roaster,Processing,Variety,RoastLevel,Type,BrewingMethod,BrewingRecipe,Rating,Sour,Sweet,Salty,Bitter,Note
+2021-06-06,Aestas,Kenya,Palmichal,Rebelbean,Natural,Bourbon,2,80,Aeropress,aaa,5,4,1,1,1,S ledem
+2021-06-06,Aestas,Costa Rica,Cadexsa,Monogram,Carbon,Bourbon,4,80,Espresso,aaa,2,4,3,3,2,Mandle
+2021-06-06,Aestas,Kenya,Dambi Uddo,Motmot,Honey,Catuai,5,90,Aeropress,,5,1,4,1,5,Karamelky
+2021-06-06,Talon,Costa Rica,Cadexsa,Monogram,Washed,Tabi,2,90,Aeropress,bbb,1,4,3,4,3,Mandle
+2021-06-06,Talon,Honduras,Palmichal,Rebelbean,Washed,Bourbon,5,80,V60,bbb,4,4,3,5,2,
+2021-06-06,Cruduk,Kenya,,Rebelbean,Carbon,Catuai,1,100,Moka,ccc,2,4,4,4,2,S ledem
+2021-06-06,Cruduk,Brazil,Blend,Naughty dog,Honey,Typica,5,90,Espresso,bbb,2,5,4,1,1,S ledem
+2021-06-06,Cruduk,Brazil,Dambi Uddo,Naughty dog,Washed,Typica,4,80,Frenchpress,ccc,5,1,1,5,3,
+2021-06-06,Talon,Ethipoia,Cadexsa,Laura Coffee,Washed,Catuai,5,100,Moka,aaa,3,5,5,2,2,S ledem
+2021-06-06,Aestas,Costa Rica,Kiyumba,Laura Coffee,Washed,Tabi,3,90,V60,aaa,2,5,1,1,4,Karamelky
+2021-06-06,Cruduk,Honduras,Palmichal,Laura Coffee,Natural,Catuai,5,80,Frenchpress,bbb,5,2,3,4,3,Karamelky
+2021-06-06,Zorin,Kenya,Cadexsa,Father's,Washed,Catuai,1,80,Moka,bbb,5,2,1,1,1,
+2021-06-06,Aestas,Rwanda,Kiranga,Naughty dog,Natural,Catuai,4,100,Moka,bbb,5,5,4,2,4,S ledem
+2021-06-06,Aestas,Kenya,Palmichal,Laura Coffee,Honey,Typica,4,90,Aeropress,aaa,1,4,3,1,2,S ledem
+2021-06-06,Zorin,Honduras,Dambi Uddo,Father's,Honey,Typica,2,100,Frenchpress,aaa,1,5,1,1,2,Pomeranč
+2021-06-06,Zorin,Ethipoia,Cadexsa,Laura Coffee,Washed,Bourbon,4,100,Frenchpress,ccc,4,3,4,5,4,S ledem
+2021-06-06,Talon,Honduras,Kiranga,Naughty dog,Washed,Catuai,1,100,Moka,,5,5,2,1,5,S ledem
+2021-06-06,Aestas,Costa Rica,Kiranga,Monogram,Natural,Typica,1,80,V60,aaa,5,1,4,5,5,Mandle
+2021-06-06,Talon,Honduras,Palmichal,Monogram,Honey,Bourbon,3,90,V60,ccc,4,3,1,1,4,Karamelky
+2021-06-06,Aestas,Kenya,Blend,Father's,Honey,Bourbon,3,100,V60,ccc,3,2,4,5,3,Karamelky
+2021-06-06,Aestas,Brazil,,Naughty dog,Honey,Tabi,2,90,Aeropress,aaa,5,2,3,3,5,Mandle
+2021-06-06,Cruduk,Brazil,Palmichal,Rebelbean,Carbon,Catuai,1,100,Frenchpress,ccc,1,1,3,2,3,Pomeranč
+2021-06-06,Zorin,Costa Rica,Kiranga,Motmot,Washed,Bourbon,5,100,Espresso,bbb,4,2,1,3,3,Mandle
+2021-06-06,Cruduk,Brazil,Cadexsa,Monogram,Washed,Catuai,5,90,Moka,bbb,2,2,2,4,1,Mandle
+2021-06-06,Zorin,Brazil,,Monogram,Natural,Catuai,2,80,Aeropress,,1,4,2,2,4,Mandle
+2021-06-06,Cruduk,Honduras,Kiranga,Monogram,Natural,Typica,3,90,Aeropress,ccc,3,5,4,5,3,
+2021-06-06,Talon,Honduras,Blend,Rebelbean,Washed,Tabi,5,90,Espresso,ccc,4,5,5,1,4,S ledem
+2021-06-06,Talon,Kenya,Palmichal,Laura Coffee,Washed,Bourbon,3,90,Aeropress,ccc,5,3,1,3,5,Pomeranč
+2021-06-06,Talon,Ethipoia,Palmichal,Rebelbean,Natural,Bourbon,4,80,Frenchpress,bbb,5,5,3,4,5,Mandle
+2021-06-06,Talon,Honduras,Dambi Uddo,Naughty dog,Honey,Typica,4,90,V60,,2,1,3,5,5,
+2021-06-06,Cruduk,Brazil,Kiyumba,Father's,Natural,Bourbon,1,100,V60,,5,1,4,4,5,Pomeranč
+2021-06-06,Zorin,Ethipoia,Cadexsa,Father's,Washed,Tabi,4,100,V60,,1,5,2,1,4,Pomeranč
+2021-06-06,Talon,Ethipoia,Blend,Monogram,Carbon,Typica,2,80,Frenchpress,,3,2,3,5,4,Mandle
+2021-06-06,Zorin,Kenya,Palmichal,Rebelbean,Natural,Catuai,3,90,Moka,aaa,2,2,2,4,2,
+2021-06-06,Zorin,Ethipoia,Kiyumba,Naughty dog,Carbon,Typica,1,100,Frenchpress,,5,1,5,4,4,Mandle
+2021-06-06,Talon,Ethipoia,,Laura Coffee,Natural,Typica,2,90,Frenchpress,,1,4,3,4,2,S ledem
+2021-06-06,Aestas,Ethipoia,Blend,Naughty dog,Washed,Tabi,4,100,Frenchpress,bbb,1,3,4,3,2,Mandle
+2021-06-06,Talon,Ethipoia,Kiyumba,Laura Coffee,Honey,Tabi,4,100,Moka,aaa,3,2,1,1,1,S ledem
+2021-06-06,Aestas,Costa Rica,Cadexsa,Father's,Natural,Typica,1,80,V60,,3,3,2,5,5,S ledem
+2021-06-06,Talon,Kenya,Blend,Motmot,Honey,Typica,4,80,V60,aaa,5,2,1,3,5,Karamelky
+2021-06-06,Aestas,Rwanda,Blend,Laura Coffee,Honey,Tabi,5,80,Espresso,aaa,4,4,1,4,3,S ledem
+2021-06-06,Zorin,Honduras,Palmichal,Naughty dog,Honey,Typica,4,90,Moka,ccc,3,2,1,3,4,Pomeranč
+2021-06-06,Zorin,Rwanda,Kiranga,Laura Coffee,Honey,Bourbon,4,100,Espresso,ccc,3,3,5,3,5,Karamelky
+2021-06-06,Cruduk,Kenya,Cadexsa,Monogram,Carbon,Typica,5,100,Frenchpress,,4,1,1,3,2,S ledem
+2021-06-06,Talon,Brazil,Blend,Rebelbean,Carbon,Catuai,4,80,Moka,ccc,3,4,3,3,3,
+2021-06-06,Cruduk,Rwanda,Kiranga,Monogram,Natural,Bourbon,2,80,Frenchpress,ccc,5,5,5,3,1,Mandle
+2021-06-06,Cruduk,Rwanda,Cadexsa,Rebelbean,Washed,Bourbon,3,100,Aeropress,ccc,2,4,1,1,5,Pomeranč
+2021-06-06,Zorin,Ethipoia,Kiyumba,Father's,Washed,Catuai,4,100,Aeropress,,4,1,5,1,2,Karamelky
+2021-06-06,Talon,Kenya,Cadexsa,Motmot,Carbon,Bourbon,5,90,Frenchpress,,3,5,4,3,5,
+2021-06-06,Aestas,Honduras,Palmichal,Father's,Honey,Tabi,2,100,V60,aaa,2,1,4,4,5,Mandle
+2021-06-06,Aestas,Honduras,Kiyumba,Monogram,Honey,Typica,1,80,V60,ccc,5,2,4,1,5,S ledem
