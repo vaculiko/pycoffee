@@ -46,7 +46,6 @@ There are currently two buttons:
 ToDo:
 # Přidat pamatování si předchozích textových inputů, když uživatel rozklikne, nabídne se mu, co psal dříve. Třeba 5 nejčastějších.
 # Vyrobit akci na tlačítku Zpět :D
-# Tasting okno má prozatím obsahovat "Známka", "Acidita", "Zemitost", "Intenzita", "Sladkost", "Poznámka"
 """
 
 
@@ -67,6 +66,11 @@ def main(username='TestGUI_3.7', screen_size=(300, 600)):
     sg.theme('DarkAmber')
     base_font = ('Any 15')
     base_align = 'center'   # For justification parameter = horizontal alignment of elements
+    roast_levels = ['         Světlé pražení',
+                    '         Polosvětlé pražení',
+                    '         Střední pražení',
+                    '         Polotmavé pražení',
+                    '         Tmavé pražení']
 
     # ---- Function for generating text inputs & enabling of easy formatting for Beans Origin section ---- #
     def BeansOrigin(key_sp, def_text):
@@ -113,13 +117,8 @@ def main(username='TestGUI_3.7', screen_size=(300, 600)):
             # -- Spin selection box for Roasting Levels -- *
             [sg.Spin(
                 key='RoastLevel',
-                values=[
-                    '         Světlé pražení',
-                    '         Polosvětlé pražení',
-                    '         Střední pražení',
-                    '         Polotmavé pražení',
-                    '         Tmavé pražení'],
-                initial_value='         Střední pražení',
+                values=roast_levels,
+                initial_value=roast_levels[2],
                 font=base_font,
                 pad=((5, 5), (10, 10)))],
             # -- Slider with Arabica/Robusta ratio -- *
@@ -197,10 +196,10 @@ def main(username='TestGUI_3.7', screen_size=(300, 600)):
                 elif col == 'User':   # Autofill username
                     row_dict[col] = username
                 elif col == 'RoastLevel':
-                    # Remove trailing spaces
-                    row_dict[col] = values[col].lstrip()
+                    # Convert roast level to number range (1-5), low to high
+                    row_dict[col] = roast_levels.index(values[col]) + 1
                 elif col == 'Type':   # Type has integer value and cannot be uppercased
-                    row_dict[col] = values[col]
+                    row_dict[col] = int(values[col])
                 else:                 # Make all inputs start with uppercase
                     row_dict[col] = values[col].title()
 
