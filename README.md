@@ -56,3 +56,4 @@ Python based web app for coffee tasting with taste profile visualization and com
   - [Themes](https://media.geeksforgeeks.org/wp-content/uploads/20200511200254/f19.jpg)
 - [Pandas Basics Video](https://youtu.be/vmEHCJofslg)
 - [Matplotlib Basics Video](https://www.youtube.com/watch?v=DAQNHzOcO5A)
+- [Pandas Visualization](https://pandas.pydata.org/pandas-docs/stable/user_guide/visualization.html)
