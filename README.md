@@ -8,9 +8,18 @@ Python based web app for coffee tasting with taste profile visualization and com
 
 ## TODO
 
-- [ ] GUI - Aestas  
-- [ ] Pandas database - Talon  
-- [ ] Taste wheel - Zorin
+- GUI - Aestas  
+- Pandas database - Talon  
+- Taste wheel - Zorin
+- Testing - Cruduk
+
+- [ ] New user button - add username and pw hash to database, create tasting database
+- [ ] Home screen show info about brewing from all databases
+- [ ] Add window with last 5 entries buttons as autofill for bean info + new bean button
+- [ ] Most used brewing methods (aeropress, v60, espresso, moka) as (radio) buttons + other as selection list/dropdown
+- [ ] Brewing methods adaptive ordering based on recent entries (dynamic default value)
+- [ ] Back button
+- [ ] Database taste wheel/visualization
 - [ ] Discord user autenthication
 
 ## Database Structure
