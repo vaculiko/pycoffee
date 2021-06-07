@@ -122,7 +122,7 @@ def main(username='TestGUI_3.7', screen_size=(300, 600)):
                 font=base_font,
                 pad=((5, 5), (10, 10)))],
             # -- Slider with Arabica/Robusta ratio -- *
-            [sg.Text('0', key='_LEFT_', font=base_font),                     # Robusta counter
+            [sg.Text('0', key='_LEFT_', font=base_font,size=(3,1)),          # Robusta counter
              sg.Text('Robusta', font=base_font, key='Robusta',               # Robusta name
                      justification='left'),
              sg.Text('Arabica', font=base_font, key='Arabica',               # Arabica name
