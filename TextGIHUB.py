@@ -1,6 +1,6 @@
 test = 'ucim se s gitem'
 print(test)
-print('From source back to you')
+print('Talon sync test 2')
 print('Edit from Talon')
 
 print('Does push work?')
