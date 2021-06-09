@@ -7,7 +7,7 @@ print('New row')
 
 print('How to resolve conflict in 10 easy steps.')
 
-print('Push from local')
+print('Step 1: Create conflict.')
 print('Test with Talon, morning.')
 print('How is your morning coffee sir?')
 
