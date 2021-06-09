@@ -5,7 +5,7 @@ print('Edit from Talon')
 
 print('New row')
 
-print('Does push work?')
+print('How to resolve conflict in 10 easy steps.')
 
 print('Push from local')
 print('Test with Talon, morning.')
