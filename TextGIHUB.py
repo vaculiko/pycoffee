@@ -17,3 +17,6 @@ print('Conflict from JonMagor')
 print('Colaborate or not')
 
 print('Test pull Aestas')
+
+
+print('test 09/06')
