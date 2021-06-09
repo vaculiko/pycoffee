@@ -1,6 +1,6 @@
 test = 'ucim se s gitem'
 print(test)
-print('Talon sync test 2')
+print('Talon sync test 3')
 print('Edit from Talon')
 
 print('New row')
