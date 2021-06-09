@@ -7,3 +7,5 @@ print('Does push work?')
 
 print('Push from local')
 print('Test with Talon, morning.')
+
+print('Talon, sync test')
