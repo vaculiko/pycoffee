@@ -7,3 +7,4 @@ print('Does push work?')
 
 print('Push from local')
 print('Test with Talon, morning.')
+print('How is your morning coffee sir?')
