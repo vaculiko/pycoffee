@@ -9,4 +9,6 @@ print('Push from local')
 print('Test with Talon, morning.')
 print('How is your morning coffee sir?')
 
-print('Talon, sync test')
+
+
+print('Colaborate or not')
