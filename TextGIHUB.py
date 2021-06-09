@@ -12,6 +12,6 @@ print('Step 1: Create conflict.')
 print('Test with Talon, morning.')
 print('How is your morning coffee sir?')
 
-
+print('Step 2: Identify conflict type.')
 
 print('Colaborate or not')
