@@ -7,7 +7,7 @@ print('New row')
 
 print('Does push work?')
 
-print('Push from local')
+print('Tramtadadaaa')
 print('Test with Talon, morning.')
 print('How is your morning coffee sir?')
 
