@@ -1,10 +1,8 @@
-from tkinter.constants import CENTER
-from types import resolve_bases
-from warnings import resetwarnings
 import pandas as pd
 import PySimpleGUI as sg
-from datetime import date
 from pathlib import Path
+
+from pandas.core.indexes.numeric import IntegerIndex
 
 """
 Windows Layout Explanation
@@ -44,7 +42,8 @@ def main(screen_size=(300, 600)):
     sg.theme('DarkAmber')
     base_font = ('Any 15')
     base_align = 'center'   # For justification parameter = horizontal alignment of elements
-
+    brewing_methods = pd.read_csv('data/parameters.csv')['BrewingMethod'].dropna().tolist() # remove NaN values
+    
     # ---- Function for generating text inputs & enabling of easy formatting for Beans Origin section ---- #
     def BrewingSpecs(key_sp, def_text):
         return [sg.Input(key=key_sp,
@@ -73,18 +72,23 @@ def main(screen_size=(300, 600)):
     # ------ "Brewing" Layout Definition ------ #
     layoutBrew = [
         # ---- Menu, for future use, momentarily just for show ---- #
-        [sg.Menu(menu_def, tearoff=True)],
+        #[sg.Menu(menu_def, tearoff=True)],
 
         # ---- Fancy frame and title ---- #
         [sg.Frame('', layout=[
             [sg.Text('Příprava', font=base_font)],
 
             # ---- Generated "Brewing" text input fields: ---- #
-            [sg.Column(layout=[BrewingSpecs(key_sp, def_text) for key_sp, def_text in [
-                       (keys[i], def_txs[i]) for i in range(len(keys))]])],
+            # list comprehension for two variables using zip
+            [sg.Column(layout=[BrewingSpecs(k, d) for k, d in zip(keys, def_txs)])],
+            
+            [sg.Drop(values=brewing_methods,
+                     size=(30, 1),
+                     font=('Any 15'),
+                     pad=((0, 0), (10, 10)))]                                                    
 
             # ---- Fancy frame ends here ---- #
-        ], element_justification='center')],
+        ], element_justification=base_align)],
 
         # ---- Buttons to submit and go for the next page OR return back---- #
         [sg.Column(buttons, justification=base_align, key='ColumnButtons', element_justification=base_align)]]
@@ -133,8 +137,11 @@ def main(screen_size=(300, 600)):
         if event == 'Next':
             windowBrew.close()
             return {key: values[key].title() for key in keys}
+        if event == 'Back':
+            windowBrew.close()
+            return 'back'
         # -- End program if User closes window -- #
-        if event in (sg.WIN_CLOSED, 'Exit', 'Back'):
+        if event in (sg.WIN_CLOSED, 'Exit'):
             break
 
     windowBrew.close()
