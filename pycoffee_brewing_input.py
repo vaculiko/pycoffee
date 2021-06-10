@@ -33,15 +33,12 @@ ToDo:
 
 
 def main(screen_size=(300, 600)):
-    # ------ Menu Definition ------ #
-    menu_def = [['&Account', ['&Open', '&Save', 'E&xit', 'Properties']],
-                ['&History', ['Paste', ['Special', 'Normal', ], 'Undo'], ],
-                ['&Help', '&About...'], ]
-
     # ------ Global definitions ------ #
     sg.theme('DarkAmber')
     base_font = ('Any 15')
     base_align = 'center'   # For justification parameter = horizontal alignment of elements
+    
+    # ------ Parameters for coffee input ------ #
     brewing_methods = pd.read_csv('data/parameters.csv')['BrewingMethod'].dropna().tolist() # remove NaN values
     
     # ---- Function for generating text inputs & enabling of easy formatting for Beans Origin section ---- #
@@ -71,9 +68,6 @@ def main(screen_size=(300, 600)):
 
     # ------ "Brewing" Layout Definition ------ #
     layoutBrew = [
-        # ---- Menu, for future use, momentarily just for show ---- #
-        #[sg.Menu(menu_def, tearoff=True)],
-
         # ---- Fancy frame and title ---- #
         [sg.Frame('', layout=[
             [sg.Text('Příprava', font=base_font)],
@@ -82,10 +76,11 @@ def main(screen_size=(300, 600)):
             # list comprehension for two variables using zip
             [sg.Column(layout=[BrewingSpecs(k, d) for k, d in zip(keys, def_txs)])],
             
-            [sg.Drop(values=brewing_methods,
-                     size=(30, 1),
-                     font=('Any 15'),
-                     pad=((0, 0), (10, 10)))]                                                    
+            # dropdown demo
+            # [sg.Drop(values=brewing_methods,
+            #          size=(30, 1),
+            #          font=('Any 15'),
+            #          pad=((0, 0), (10, 10)))]                                                    
 
             # ---- Fancy frame ends here ---- #
         ], element_justification=base_align)],
