@@ -2,8 +2,6 @@ import pandas as pd
 import PySimpleGUI as sg
 from pathlib import Path
 
-from pandas.core.indexes.numeric import IntegerIndex
-
 """
 Windows Layout Explanation
 --------------------------
@@ -37,10 +35,11 @@ def main(screen_size=(300, 600)):
     sg.theme('DarkAmber')
     base_font = ('Any 15')
     base_align = 'center'   # For justification parameter = horizontal alignment of elements
-    
+
     # ------ Parameters for coffee input ------ #
-    brewing_methods = pd.read_csv('data/parameters.csv')['BrewingMethod'].dropna().tolist() # remove NaN values
-    
+    brewing_methods = pd.read_csv(
+        'data/parameters.csv')['BrewingMethod'].dropna().tolist()  # remove NaN values
+
     # ---- Function for generating text inputs & enabling of easy formatting for Beans Origin section ---- #
     def BrewingSpecs(key_sp, def_text):
         return [sg.Input(key=key_sp,
@@ -74,13 +73,14 @@ def main(screen_size=(300, 600)):
 
             # ---- Generated "Brewing" text input fields: ---- #
             # list comprehension for two variables using zip
-            [sg.Column(layout=[BrewingSpecs(k, d) for k, d in zip(keys, def_txs)])],
-            
+            [sg.Column(layout=[BrewingSpecs(k, d)
+                       for k, d in zip(keys, def_txs)])],
+
             # dropdown demo
             # [sg.Drop(values=brewing_methods,
             #          size=(30, 1),
             #          font=('Any 15'),
-            #          pad=((0, 0), (10, 10)))]                                                    
+            #          pad=((0, 0), (10, 10)))]
 
             # ---- Fancy frame ends here ---- #
         ], element_justification=base_align)],

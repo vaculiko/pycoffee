@@ -1,6 +1,3 @@
-from tkinter.constants import CENTER
-from types import resolve_bases
-from warnings import resetwarnings
 import pandas as pd
 import PySimpleGUI as sg
 from datetime import date
@@ -49,18 +46,13 @@ ToDo:
 """
 
 
-def main(username='TestGUI_3.7', screen_size=(300, 600)):
+def main(username, screen_size=(300, 600)):
     # ------ Database Definition ------ #
     # Entry info: date, user
     # Bean info: Country, Name, Roaster, Processing, Roast Level, Type, Variety, Brewing Method, Brewing Recipe
     cols = ["Date", "User", "Country", "Name", "Roaster",
             "Processing", "Variety", "RoastLevel", "Type"]
     df = pd.DataFrame(columns=cols)  # Initialize dataframe
-
-    # ------ Menu Definition ------ #
-    menu_def = [['&Account', ['&Open', '&Save', 'E&xit', 'Properties']],
-                ['&History', ['Paste', ['Special', 'Normal', ], 'Undo'], ],
-                ['&Help', '&About...'], ]
 
     # ------ Global definitions ------ #
     sg.theme('DarkAmber')
@@ -71,6 +63,13 @@ def main(username='TestGUI_3.7', screen_size=(300, 600)):
                     '         Střední pražení',
                     '         Polotmavé pražení',
                     '         Tmavé pražení']
+
+    # ------ Parameters for coffee input ------ #
+    df = pd.read_csv('data/parameters.csv', index_col=False)
+    countries = df['Country'].dropna().tolist()
+    roaster = df['Roaster'].dropna().tolist()
+    processing = df['Processing'].dropna().tolist()
+    variety = df['Variety'].dropna().tolist()
 
     # ---- Function for generating text inputs & enabling of easy formatting for Beans Origin section ---- #
     def BeansOrigin(key_sp, def_text):
@@ -93,25 +92,25 @@ def main(username='TestGUI_3.7', screen_size=(300, 600)):
                "Odrůda - Heirloom, Tabi..."]
 
     # ---- Buttons ---- #
-    buttons = [[sg.Button(button_text='Vybrat přípravu', key='Next', auto_size_button=None,
-                          tooltip='Kliknutím přejdeš na známkování chuti', font=('Any 24'),
-                          mouseover_colors=('sienna1', 'OrangeRed4'))],
-               [sg.Button(button_text='Zpět', bind_return_key=True, key='Back',
-                          tooltip='Kliknutím se vrátíš na login', font=base_font,
-                          mouseover_colors=('sienna1', 'OrangeRed4'))]]
+    buttons = [
+        [sg.Button(button_text='Vybrat přípravu', key='Next', auto_size_button=None,
+                   tooltip='Kliknutím přejdeš na známkování chuti', font=('Any 24'),
+                   mouseover_colors=('sienna1', 'OrangeRed4'))],
+        [sg.Button(button_text='Zpět', bind_return_key=True, key='Back',
+                   tooltip='Kliknutím se vrátíš na login', font=base_font,
+                   mouseover_colors=('sienna1', 'OrangeRed4'))],
+
+    ]
 
     # ------ "Beans" Layout Definition ------ #
     layoutBeans = [
-        # ---- Menu, for future use, momentarily just for show ---- #
-        [sg.Menu(menu_def, tearoff=True)],
-
         # ---- Fancy frame and title ---- #
         [sg.Frame('', layout=[
             [sg.Text('Zrno', font=base_font)],
 
             # ---- Generated "Beans Origin" text input fields: ---- #
-            [sg.Column(layout=[BeansOrigin(key_sp, def_text) for key_sp, def_text in [
-                       (keys[i], def_txs[i]) for i in range(len(keys))]])],
+            [sg.Column(layout=[BeansOrigin(k, d)
+                       for k, d in zip(keys, def_txs)])],
 
             # ---- Beans processing details ---- #
             # -- Spin selection box for Roasting Levels -- *
@@ -122,7 +121,7 @@ def main(username='TestGUI_3.7', screen_size=(300, 600)):
                 font=base_font,
                 pad=((5, 5), (10, 10)))],
             # -- Slider with Arabica/Robusta ratio -- *
-            [sg.Text('0', key='_LEFT_', font=base_font,size=(3,1)),          # Robusta counter
+            [sg.Text('0', key='_LEFT_', font=base_font, size=(3, 1)),        # Robusta counter
              sg.Text('Robusta', font=base_font, key='Robusta',               # Robusta name
                      justification='left'),
              sg.Text('Arabica', font=base_font, key='Arabica',               # Arabica name
@@ -204,8 +203,11 @@ def main(username='TestGUI_3.7', screen_size=(300, 600)):
                     row_dict[col] = values[col].title()
 
             return row_dict  # pass to next window, write to csv later
+        if event == 'Back':
+            windowBeans.close()
+            return 'back'
         # -- End program if User closes window -- #
-        if event in (sg.WIN_CLOSED, 'Exit', 'Back'):
+        if event in (sg.WIN_CLOSED, 'Exit'):
             break
 
     windowBeans.close()
@@ -213,4 +215,4 @@ def main(username='TestGUI_3.7', screen_size=(300, 600)):
 
 if __name__ == "__main__":
     # execute only if launched from command line/opened directly
-    main()
+    print(main(username='TestGUI'))
