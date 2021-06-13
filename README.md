@@ -57,3 +57,5 @@ Python based web app for coffee tasting with taste profile visualization and com
 - [Pandas Basics Video](https://youtu.be/vmEHCJofslg)
 - [Matplotlib Basics Video](https://www.youtube.com/watch?v=DAQNHzOcO5A)
 - [Pandas Visualization](https://pandas.pydata.org/pandas-docs/stable/user_guide/visualization.html)
+- [Progressive Web App Basics](https://www.youtube.com/watch?v=sFsRylCQblw)
+- [PWA in Flask](https://stackoverflow.com/questions/46381128/building-progressive-web-apps-using-python-flask)
