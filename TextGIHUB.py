@@ -24,4 +24,4 @@ print('test 14/06')
 
 print('test zorin new repository')
 
-print('Ahoj zorine!')
+print('Čau Talone!')
