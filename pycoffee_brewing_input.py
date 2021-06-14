@@ -58,10 +58,10 @@ def main(screen_size=(300, 600)):
                "Postup - inverted aeropress, ristretto, 40:60 dripper..."]
 
     # Buttons
-    buttons = [[sg.Button(button_text='Jde se ochutnávat!', key='Next', auto_size_button=None,
+    buttons = [[sg.Button(button_text='Jde se ochutnávat!', key='Next', bind_return_key=True, auto_size_button=None,
                           tooltip='Kliknutím přejdeš na známkování chuti', font=('Any 24'),
                           mouseover_colors=('sienna1', 'OrangeRed4'))],
-               [sg.Button(button_text='Zpět', bind_return_key=True, key='Back',
+               [sg.Button(button_text='Zpět', key='Back',
                           tooltip='Kliknutím se vrátíš na login', font=base_font,
                           mouseover_colors=('sienna1', 'OrangeRed4'))]]
 
