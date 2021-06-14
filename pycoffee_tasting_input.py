@@ -93,8 +93,8 @@ def main(username, screen_size=(300, 600)):
 
     # ---- Buttons ---- #
     buttons = [
-        [sg.Button(button_text='Vybrat přípravu', key='Next', bind_return_key=True, auto_size_button=None,
-                   tooltip='Kliknutím přejdeš na známkování chuti', font=('Any 24'),
+        [sg.Button(button_text='Vybrat přípravu', key='Next', bind_return_key=True, focus=True,
+                   auto_size_button=None, tooltip='Kliknutím přejdeš na známkování chuti', font=('Any 24'),
                    mouseover_colors=('sienna1', 'OrangeRed4'))],
         [sg.Button(button_text='Zpět', key='Back',
                    tooltip='Kliknutím se vrátíš na login', font=base_font,
