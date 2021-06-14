@@ -34,7 +34,7 @@ def main(screen_size=(300, 600)):
         [sg.Input(key='-password-', size=size,
                 font=base_font, password_char='\u2022')],
         [sg.Text('', key='-status-', size=size, font=base_font)],
-        [sg.Button('Login', size=button_size, font=base_font)]],
+        [sg.Button('Login', size=button_size, font=base_font, bind_return_key=True)]],
         element_justification='center')
     ]]
 
