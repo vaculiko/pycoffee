@@ -22,4 +22,4 @@ print('Test pull Aestas')
 print('test 14/06')
 
 
-print('bang')
+print('test zorin new repository')
