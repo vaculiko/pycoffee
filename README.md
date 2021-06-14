@@ -45,6 +45,13 @@ Python based web app for coffee tasting with taste profile visualization and com
   - **Bitter (Hořká)**
   - **Note (Poznámka)** - optional text input
 
+## Future ToDo ideas
+  - [ ] Optional interactive guide after brewing method selection
+  - [ ] Circle taste-graph
+  - [ ] 2 and more brewed samples compare graph
+  - [ ] Web interface to use on mobile phone
+
+
 ## Resources
 
 - Tasting
