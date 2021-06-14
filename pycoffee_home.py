@@ -24,7 +24,7 @@ def main(user, screen_size=(300, 600)):
             f"Naši uživatelé uvařili celkem {total} šálků kávy.", font=base_font, size=(20, 5))],
         [sg.Text(
             f"Poslední šálek uvařil {last_brew['User']} dne {last_brew['Date']}.", font=base_font, size=(20, 5))],
-        [sg.Button('Jde se vařit', key='-brew-',
+        [sg.Button('Jde se vařit', key='-brew-', bind_return_key=True,
                    font=base_font, size=(20, 1))],
         [sg.Button('Ukaž databázi', key='-database-',
                    font=base_font, size=(20, 1))]
