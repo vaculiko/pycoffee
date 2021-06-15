@@ -6,25 +6,29 @@ Python based web app for coffee tasting with taste profile visualization and com
 
 ![layout](pycoffee-draft-v01.png)
 
-## TODO
-
 - GUI - Aestas  
 - Pandas database - Talon  
 - Taste wheel - Zorin
 - Testing - Cruduk
 
+## TODO
+
 - [ ] Create "project" in our repository and migrate ToDo list into it
 - [ ] New user button - add username and pw hash to database, create tasting database
 - [x] Home screen show info about brewing from all databases
 - [ ] Add window with last 5 entries buttons as autofill for bean info + new bean button
-- [ ] Add roast date field to bean info and database
 - [ ] Most used brewing methods (aeropress, v60, espresso, moka) as (radio) buttons + other as selection list/dropdown
 - [ ] Brewing methods adaptive ordering based on recent entries (dynamic default value) + search database
 - [ ] Back button
 - [ ] Database taste wheel/visualization
-- [ ] Discord user autenthication
 - [ ] Roasting date to tasting Input
 
+## Future TODO
+- [ ] Optional interactive guide after brewing method selection
+- [ ] Circle taste-graph
+- [ ] 2 and more brewed samples compare graph
+- [ ] Web interface to use on mobile phone
+- [ ] Discord user autenthication
 
 ## Database Structure
 
@@ -49,13 +53,6 @@ Python based web app for coffee tasting with taste profile visualization and com
   - **Bitter (Hořká)**
   - **Note (Poznámka)** - optional text input
 
-## Future ToDo ideas
-  - [ ] Optional interactive guide after brewing method selection
-  - [ ] Circle taste-graph
-  - [ ] 2 and more brewed samples compare graph
-  - [ ] Web interface to use on mobile phone
-  - [ ] Discord user autenthication
-
 ## Resources
 
 - Tasting
@@ -69,4 +66,4 @@ Python based web app for coffee tasting with taste profile visualization and com
 - [Matplotlib Basics Video](https://www.youtube.com/watch?v=DAQNHzOcO5A)
 - [Pandas Visualization](https://pandas.pydata.org/pandas-docs/stable/user_guide/visualization.html)
 - [Progressive Web App Basics](https://www.youtube.com/watch?v=sFsRylCQblw)
-- [PWA in Flask](https://stackoverflow.com/questions/46381128/building-progressive-web-apps-using-python-flask)
+- [PWA in Flask](https://flaskpwa.com/)
