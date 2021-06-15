@@ -21,6 +21,7 @@ Python based web app for coffee tasting with taste profile visualization and com
 - [ ] Back button
 - [ ] Database taste wheel/visualization
 - [ ] Discord user autenthication
+- [ ] Roasting date to tasting Input
 
 ## Database Structure
 
