@@ -13,6 +13,7 @@ Python based web app for coffee tasting with taste profile visualization and com
 - Taste wheel - Zorin
 - Testing - Cruduk
 
+- [ ] Create "project" in our repository and migrate ToDo list into it
 - [ ] New user button - add username and pw hash to database, create tasting database
 - [x] Home screen show info about brewing from all databases
 - [ ] Add window with last 5 entries buttons as autofill for bean info + new bean button
