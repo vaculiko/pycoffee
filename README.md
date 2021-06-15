@@ -14,14 +14,16 @@ Python based web app for coffee tasting with taste profile visualization and com
 - Testing - Cruduk
 
 - [ ] New user button - add username and pw hash to database, create tasting database
-- [ ] Home screen show info about brewing from all databases
+- [x] Home screen show info about brewing from all databases
 - [ ] Add window with last 5 entries buttons as autofill for bean info + new bean button
+- [ ] Add roast date field to bean info and database
 - [ ] Most used brewing methods (aeropress, v60, espresso, moka) as (radio) buttons + other as selection list/dropdown
 - [ ] Brewing methods adaptive ordering based on recent entries (dynamic default value) + search database
 - [ ] Back button
 - [ ] Database taste wheel/visualization
 - [ ] Discord user autenthication
 - [ ] Roasting date to tasting Input
+
 
 ## Database Structure
 
@@ -45,6 +47,13 @@ Python based web app for coffee tasting with taste profile visualization and com
   - **Salty (Slaná)**
   - **Bitter (Hořká)**
   - **Note (Poznámka)** - optional text input
+
+## Future ToDo ideas
+  - [ ] Optional interactive guide after brewing method selection
+  - [ ] Circle taste-graph
+  - [ ] 2 and more brewed samples compare graph
+  - [ ] Web interface to use on mobile phone
+  - [ ] Discord user autenthication
 
 ## Resources
 
