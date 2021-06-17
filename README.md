@@ -68,3 +68,4 @@ Python based web app for coffee tasting with taste profile visualization and com
 - [Progressive Web App Basics](https://www.youtube.com/watch?v=sFsRylCQblw)
 - [PWA in Flask](https://flaskpwa.com/) - from scratch
 - [Anvil Python Web App Framework](https://anvil.works/articles/python-gui-builder-web) - GUI builder, hosting
+- [Anvil Github Connection](https://anvil.works/forum/t/newbies-guide-to-anvil-and-git-github/4644/8)
